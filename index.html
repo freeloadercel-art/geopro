@@ -274,35 +274,58 @@
             </div>
         </section>
 
-        <!-- SPATIAL EVIDENCE MAPS (four static map cards) -->
-        <section id="maps" class="section">
-            <h2 class="section-title">Spatial Evidence Maps</h2>
-            <p style="margin-bottom:1.5rem;">Click any map to open the full interactive version from the authoritative source. These maps allow you to explore the data in detail.</p>
-            <div class="map-grid">
-                <div class="map-item">
-                    <div class="map-header"><h4>Excess Deaths by Raion (1932–1934)</h4><p>Source: Harvard MAPA Project</p></div>
-                    <div class="map-container"><a href="https://gis.huri.harvard.edu/population-losses" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Holodomor_map_1932-33.png/800px-Holodomor_map_1932-33.png" alt="Mortality map"></a></div>
-                    <div class="map-note"><strong>Analysis:</strong> Dark red areas (Poltava, Cherkasy) show >50% rural losses. <a href="https://gis.huri.harvard.edu/population-losses" target="_blank">Open interactive map →</a></div>
-                </div>
-                <div class="map-item">
-                    <div class="map-header"><h4>Grain Requisition Targets (1932)</h4><p>Source: Holodomor Research and Education Consortium</p></div>
-                    <div class="map-container"><a href="https://holodomor.ca/resources/maps/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Black_soil_map_Ukraine.png/800px-Black_soil_map_Ukraine.png" alt="Grain quotas map"></a></div>
-                    <div class="map-note"><strong>Analysis:</strong> Quota size strongly correlates with mortality (r²=0.78). <a href="https://holodomor.ca/resources/maps/" target="_blank">Explore at HREC →</a></div>
-                </div>
-                <div class="map-item">
-                    <div class="map-header"><h4>"Black List" Villages (Чорні дошки)</h4><p>Source: Holodomor Museum</p></div>
-                    <div class="map-container"><a href="https://memorialholodomor.org.ua/en/map" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Holodomor_memorial_Kyiv.jpg/800px-Holodomor_memorial_Kyiv.jpg" alt="Blacklist map"></a></div>
-                    <div class="map-note"><strong>Analysis:</strong> Blacklisted villages cluster in ethnic Ukrainian agricultural regions. <a href="https://memorialholodomor.org.ua/en/map" target="_blank">Open interactive map →</a></div>
-                </div>
-                <div class="map-item">
-                    <div class="map-header"><h4>Survivor Testimonies by Village</h4><p>Source: Harvard Ukrainian Research Institute</p></div>
-                    <div class="map-container"><a href="https://gis.huri.harvard.edu/oral-history" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Holodomor_1933_Children.jpg/800px-Holodomor_1933_Children.jpg" alt="Oral history map"></a></div>
-                    <div class="map-note"><strong>Analysis:</strong> Testimonies of cannibalism, deportation cluster in highest mortality zones. <a href="https://gis.huri.harvard.edu/oral-history" target="_blank">Explore at Harvard →</a></div>
-                </div>
+       <!-- SPATIAL EVIDENCE MAPS (interactive Leaflet maps) -->
+<section id="maps" class="section">
+    <h2 class="section-title">Spatial Evidence Maps</h2>
+    <p style="margin-bottom:1.5rem;">Interactive maps that reveal the spatial patterns of the Holodomor. Click, zoom, and explore.</p>
+    <div class="map-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 2rem;">
+        <!-- Map 1: Excess Deaths -->
+        <div class="map-item">
+            <div class="map-header">
+                <h4>Excess Deaths by Raion (1933)</h4>
+                <p>Source: Harvard MAPA Project / Wolowyna et al.</p>
             </div>
-        </section>
+            <div id="map1" class="map-container" style="height: 400px; width: 100%;"></div>
+            <div class="map-note">
+                <strong>Analysis:</strong> Darkest red areas (Poltava, Cherkasy) show >50% rural losses. Mortality is highest in the black soil belt.
+            </div>
+        </div>
+        <!-- Map 2: Grain Requisition (Black Soil Belt) -->
+        <div class="map-item">
+            <div class="map-header">
+                <h4>Grain Requisition Targets</h4>
+                <p>Black soil belt – the agricultural heartland</p>
+            </div>
+            <div id="map2" class="map-container" style="height: 400px; width: 100%;"></div>
+            <div class="map-note">
+                <strong>Analysis:</strong> The black soil region (chornozem) produced most of Ukraine's grain. Soviet quotas were highest here, directly linking to mortality.
+            </div>
+        </div>
+        <!-- Map 3: Black List Villages -->
+        <div class="map-item">
+            <div class="map-header">
+                <h4>"Black List" Villages (Чорні дошки)</h4>
+                <p>Clustering of high‑mortality zones</p>
+            </div>
+            <div id="map3" class="map-container" style="height: 400px; width: 100%;"></div>
+            <div class="map-note">
+                <strong>Analysis:</strong> Blacklisted villages were concentrated in the red areas. These villages were deliberately cut off from food.
+            </div>
+        </div>
+        <!-- Map 4: Memorial Sites -->
+        <div class="map-item">
+            <div class="map-header">
+                <h4>Holodomor Memorial Sites</h4>
+                <p>Places of remembrance across Ukraine</p>
+            </div>
+            <div id="map4" class="map-container" style="height: 400px; width: 100%;"></div>
+            <div class="map-note">
+                <strong>Analysis:</strong> Museums and memorials preserve the memory of the victims. Click on a marker for details.
+            </div>
+        </div>
     </div>
-
+</section>
+ </div>
     <footer class="footer" style="background: #0b1e33; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
         <p>Holodomor Spatial Analysis Project | Part 1 – Foundations</p>
         <p style="margin-top:0.5rem; font-size:0.8rem;">Data: Harvard MAPA, Wolowyna-Levchuk, Central State Archive of Ukraine</p>
