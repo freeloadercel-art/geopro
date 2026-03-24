@@ -325,6 +325,142 @@
         </div>
     </div>
 </section>
+        // ============================================
+// SPATIAL EVIDENCE MAPS – interactive versions
+// ============================================
+// Function to load GeoJSON once and reuse for maps that need oblast boundaries
+function initSpatialMaps() {
+    const geojsonUrl = './ukraine_oblasts.geojson.geojson';
+
+    fetch(geojsonUrl)
+        .then(response => response.json())
+        .then(data => {
+            // ---- Map 1: Excess Deaths (1933) ----
+            const map1 = L.map('map1').setView([49.0, 32.0], 6);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; CartoDB',
+                subdomains: 'abcd'
+            }).addTo(map1);
+
+            // Use 1933 mortality data
+            const year = 1933;
+            function getMortality(name) {
+                if (!name) return null;
+                if (yearData[year][name]) return yearData[year][name];
+                const base = name.replace(/(ska|kyi|ska oblast|kyi oblast|oblast)$/i, '').trim();
+                for (let key in yearData[year]) {
+                    if (key.includes(base) || base.includes(key)) return yearData[year][key];
+                }
+                return null;
+            }
+            L.geoJSON(data, {
+                style: function(feature) {
+                    const name = feature.properties.shapeName || feature.properties.NAME_1 || feature.properties.NAME || '';
+                    const mortality = getMortality(name);
+                    return {
+                        fillColor: getContinuousColor(mortality),
+                        weight: 1.5,
+                        opacity: 0.8,
+                        color: '#2c3e50',
+                        fillOpacity: 0.7
+                    };
+                },
+                onEachFeature: function(feature, layer) {
+                    const name = feature.properties.shapeName || feature.properties.NAME_1 || feature.properties.NAME || '';
+                    const mortality = getMortality(name);
+                    let popupContent = `<strong>${name}</strong><br>`;
+                    if (mortality !== null) {
+                        popupContent += `📊 Mortality (1933): ${mortality}%`;
+                        if (mortality >= 40) popupContent += ` 🔴 (Extreme)`;
+                        else if (mortality >= 20) popupContent += ` 🟠 (Severe)`;
+                    } else {
+                        popupContent += `📊 Data not available`;
+                    }
+                    layer.bindPopup(popupContent);
+                }
+            }).addTo(map1);
+            map1.fitBounds(L.latLngBounds([[44.0, 22.0], [52.5, 40.0]])); // approximate Ukraine bounds
+
+            // ---- Map 2: Black Soil Belt (polygon) ----
+            const map2 = L.map('map2').setView([49.0, 32.0], 6);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; CartoDB',
+                subdomains: 'abcd'
+            }).addTo(map2);
+            // Approximate black soil belt polygon (central/eastern Ukraine)
+            const blackSoilPolygon = [
+                [50.5, 30.5], [50.5, 36.5], [49.5, 38.0], [48.0, 38.0], [47.0, 36.0],
+                [46.5, 32.0], [47.0, 29.0], [48.5, 29.0], [49.5, 30.0], [50.5, 30.5]
+            ];
+            L.polygon(blackSoilPolygon, { color: '#8B5A2B', weight: 2, fillColor: '#CD853F', fillOpacity: 0.4 }).addTo(map2)
+                .bindPopup('Black Soil Belt (Chornozem) – most fertile agricultural land');
+            // Also add oblast boundaries for reference
+            L.geoJSON(data, {
+                style: { weight: 1, color: '#aaa', fill: false },
+                interactive: false
+            }).addTo(map2);
+            map2.fitBounds(L.latLngBounds([[44.0, 22.0], [52.5, 40.0]]));
+
+            // ---- Map 3: Black List Villages (high-mortality areas) ----
+            const map3 = L.map('map3').setView([49.0, 32.0], 6);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; CartoDB',
+                subdomains: 'abcd'
+            }).addTo(map3);
+            // Use mortality data for 1933, but style with a different color ramp (red only) to highlight worst areas
+            L.geoJSON(data, {
+                style: function(feature) {
+                    const name = feature.properties.shapeName || feature.properties.NAME_1 || feature.properties.NAME || '';
+                    const mortality = getMortality(name);
+                    // Use red intensity based on mortality
+                    let intensity = Math.min(1, (mortality || 0) / 55);
+                    let red = 100 + Math.floor(155 * intensity);
+                    return {
+                        fillColor: `rgb(${red}, 50, 50)`,
+                        weight: 1.5,
+                        opacity: 0.8,
+                        color: '#2c3e50',
+                        fillOpacity: 0.7
+                    };
+                },
+                onEachFeature: function(feature, layer) {
+                    const name = feature.properties.shapeName || feature.properties.NAME_1 || feature.properties.NAME || '';
+                    const mortality = getMortality(name);
+                    layer.bindPopup(`<strong>${name}</strong><br>Blacklisted villages were concentrated in regions with mortality >30%.`);
+                }
+            }).addTo(map3);
+            map3.fitBounds(L.latLngBounds([[44.0, 22.0], [52.5, 40.0]]));
+
+            // ---- Map 4: Memorial Sites (points) ----
+            const map4 = L.map('map4').setView([49.0, 32.0], 6);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; CartoDB',
+                subdomains: 'abcd'
+            }).addTo(map4);
+            // Add oblast boundaries as reference
+            L.geoJSON(data, {
+                style: { weight: 1, color: '#aaa', fill: false },
+                interactive: false
+            }).addTo(map4);
+            // Memorial points (coordinates from known locations)
+            const memorials = [
+                { name: "National Museum of the Holodomor-Genocide", lat: 50.4501, lon: 30.5234, desc: "Kyiv – central memorial with exhibition and 'Candle of Memory'." },
+                { name: "Holodomor Memorial, Lviv", lat: 49.8397, lon: 24.0297, desc: "Located near the Church of the Holy Apostles." },
+                { name: "Odesa Holodomor Memorial", lat: 46.4825, lon: 30.7233, desc: "Commemorative plaque and sculpture in the city center." },
+                { name: "Poltava Holodomor Memorial", lat: 49.589, lon: 34.551, desc: "Monument and mass grave site." },
+                { name: "Kharkiv Holodomor Memorial", lat: 50.0, lon: 36.23, desc: "Located in the city cemetery where victims are buried." },
+                { name: "Dnipro Holodomor Memorial", lat: 48.4647, lon: 35.046, desc: "Memorial complex honoring the victims." }
+            ];
+            memorials.forEach(m => {
+                L.marker([m.lat, m.lon]).addTo(map4)
+                    .bindPopup(`<strong>${m.name}</strong><br>${m.desc}`);
+            });
+            map4.fitBounds(L.latLngBounds([[44.0, 22.0], [52.5, 40.0]]));
+        })
+        .catch(error => console.error('Failed to load GeoJSON for spatial maps:', error));
+}
+// Wait for DOM and then call init
+document.addEventListener('DOMContentLoaded', initSpatialMaps);
  </div>
     <footer class="footer" style="background: #0b1e33; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
         <p>Holodomor Spatial Analysis Project | Part 1 – Foundations</p>
