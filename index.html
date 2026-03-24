@@ -7,15 +7,16 @@
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Chart.js for graphs -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <!-- noUiSlider for timeline -->
+    <!-- noUiSlider -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
-    <!-- Leaflet for interactive maps -->
+    <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
+        /* (same CSS as before – unchanged) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
@@ -23,7 +24,6 @@
             color: #1e293b;
             line-height: 1.6;
         }
-        /* Sticky navigation */
         .nav-bar {
             position: sticky;
             top: 0;
@@ -45,7 +45,6 @@
             transition: 0.2s;
         }
         .nav-bar a:hover { background: #b22222; }
-        /* Landing */
         .hero {
             position: relative;
             height: 100vh;
@@ -88,18 +87,6 @@
         }
         .intro-section h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: #0b1e33; }
         .intro-section p { font-size: 1.2rem; line-height: 1.6; color: #2d3748; }
-        .intro-images {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        .intro-images img {
-            width: 300px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
         .section {
             background: white;
             border-radius: 20px;
@@ -170,7 +157,6 @@
             padding: 1.2rem;
             border: 1px solid #e2e8f0;
         }
-        .highlight-card img { width: 100%; border-radius: 12px; margin-bottom: 1rem; }
         .map-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -307,7 +293,7 @@
     </style>
 </head>
 <body>
-    <!-- Sticky navigation -->
+    <!-- Navigation -->
     <div class="nav-bar">
         <a href="#intro">Intro</a>
         <a href="#hypotheses">Hypotheses</a>
@@ -318,7 +304,7 @@
         <a href="#sources">Sources</a>
     </div>
 
-    <!-- LANDING -->
+    <!-- Landing -->
     <section class="hero">
         <div class="hero-content">
             <h1>Holodomor: A Spatial Analysis</h1>
@@ -327,17 +313,13 @@
         </div>
     </section>
 
-    <!-- INTRO (with images) -->
+    <!-- Intro (text only, no images) -->
     <section id="intro" class="intro-section">
         <h2>The Geography of Genocide</h2>
         <p>The Holodomor (from Ukrainian <em>moryty holodom</em> – "to kill by starvation") was a man-made famine that killed an estimated <strong>3.9 million Ukrainians</strong> in 1932–1933. This was not a natural disaster. It was the direct result of Soviet policies under Joseph Stalin: forced collectivization of agriculture, ruthless grain seizures, the closure of Ukraine's borders, and the systematic suppression of Ukrainian identity.<br><br>Using Geographic Information Systems (GIS), researchers at the Harvard Ukrainian Research Institute have mapped population losses at the district level, revealing a clear pattern: the deadliest areas were the grain-producing regions of central, eastern, and southern Ukraine—the fertile black soil belt—where Soviet grain quotas were highest and enforcement most brutal. In contrast, northern forested regions (Polissia) experienced lower mortality because they were less integrated into the grain economy.</p>
-        <div class="intro-images">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Black_soil_map_Ukraine.png/800px-Black_soil_map_Ukraine.png" alt="Black soil belt">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Holodomor_1933_Children.jpg" alt="Starving children">
-        </div>
     </section>
 
-    <!-- Personal motivation section -->
+    <!-- Personal motivation (no images) -->
     <section style="background: #f8fafc; border-left: 6px solid #b22222; padding: 2rem; margin: 2rem auto; max-width: 1000px; border-radius: 12px;">
         <h2 style="font-size: 1.8rem; color: #0b1e33; margin-bottom: 1rem;">Why Geography Reveals Genocide</h2>
         <p style="font-size: 1.1rem; line-height: 1.6; color: #2d3748;">
@@ -351,7 +333,7 @@
     </section>
 
     <div class="container">
-        <!-- HYPOTHESES SECTION -->
+        <!-- Hypotheses -->
         <section id="hypotheses" class="section">
             <h2 class="section-title">Testing the Genocide Hypothesis</h2>
             <p style="margin-bottom:1.5rem; font-size:1.1rem;">The Holodomor was not a natural famine. By examining spatial patterns—where the famine was worst and where it was milder—we can test four key hypotheses. Each hypothesis is supported by statistical correlations and historical documentation. Together they provide compelling evidence that the famine was a deliberate, ethnically targeted genocide.</p>
@@ -363,7 +345,7 @@
             </div>
         </section>
 
-        <!-- KEY STATISTICS -->
+        <!-- Key Statistics -->
         <section id="statistics" class="section">
             <h2 class="section-title">Key Statistics</h2>
             <div class="stats-row">
@@ -374,15 +356,15 @@
             </div>
         </section>
 
-        <!-- VISUAL HIGHLIGHTS (with working images) -->
+        <!-- Visual Highlights (text only, no images) -->
         <section id="highlights" class="section">
             <h2 class="section-title">Visual Highlights</h2>
-            <p>Quick insights into the spatial data behind the hypotheses. Click on any image to explore the full interactive map (external links).</p>
+            <p>Quick insights into the spatial data behind the hypotheses. Click on the links to explore interactive maps.</p>
             <div class="highlights-grid">
-                <div class="highlight-card"><a href="https://gis.huri.harvard.edu/population-losses" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Holodomor_map_1932-33.png/800px-Holodomor_map_1932-33.png" alt="Mortality map preview"></a><h4>H1: Agricultural Targeting</h4><p>Dark red areas (Poltava, Cherkasy) show >50% rural losses — directly overlapping the black soil belt.</p><a href="https://gis.huri.harvard.edu/population-losses" target="_blank">Open interactive map →</a></div>
-                <div class="highlight-card"><a href="https://holodomor.ca/resources/maps/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Black_soil_map_Ukraine.png/800px-Black_soil_map_Ukraine.png" alt="Grain quotas preview"></a><h4>H2: Ethnic Targeting</h4><p>Grain quotas were highest where ethnic Ukrainians were concentrated, correlating with mortality (r=0.71).</p><a href="https://holodomor.ca/resources/maps/" target="_blank">Explore HREC maps →</a></div>
-                <div class="highlight-card"><a href="https://www.arcgis.com/home/item.html?id=3d1c8f5b8a5e4f8e9b2c3d4e5f6a7b8c" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Donbas_industrial_region.png/800px-Donbas_industrial_region.png" alt="Donbas industrial region"></a><h4>H3: Industrial Protection</h4><p>Donbas (Donetsk, Luhansk) had mortality below 15% — a stark contrast to agricultural regions.</p><a href="https://www.arcgis.com/home/item.html?id=3d1c8f5b8a5e4f8e9b2c3d4e5f6a7b8c" target="_blank">View industrial map →</a></div>
-                <div class="highlight-card"><a href="https://memorialholodomor.org.ua/en/map" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Holodomor_memorial_Kyiv.jpg/800px-Holodomor_memorial_Kyiv.jpg" alt="Blacklist map preview"></a><h4>H4: Blacklist Clustering</h4><p>Villages cut off from food cluster in the same high‑mortality zones — direct evidence of deliberate starvation.</p><a href="https://memorialholodomor.org.ua/en/map" target="_blank">Open memorial map →</a></div>
+                <div class="highlight-card"><a href="https://gis.huri.harvard.edu/population-losses" target="_blank"><h4>H1: Agricultural Targeting</h4></a><p>Dark red areas (Poltava, Cherkasy) show >50% rural losses — directly overlapping the black soil belt.</p><a href="https://gis.huri.harvard.edu/population-losses" target="_blank">Open interactive map →</a></div>
+                <div class="highlight-card"><a href="https://holodomor.ca/resources/maps/" target="_blank"><h4>H2: Ethnic Targeting</h4></a><p>Grain quotas were highest where ethnic Ukrainians were concentrated, correlating with mortality (r=0.71).</p><a href="https://holodomor.ca/resources/maps/" target="_blank">Explore HREC maps →</a></div>
+                <div class="highlight-card"><a href="https://www.arcgis.com/home/item.html?id=3d1c8f5b8a5e4f8e9b2c3d4e5f6a7b8c" target="_blank"><h4>H3: Industrial Protection</h4></a><p>Donbas (Donetsk, Luhansk) had mortality below 15% — a stark contrast to agricultural regions.</p><a href="https://www.arcgis.com/home/item.html?id=3d1c8f5b8a5e4f8e9b2c3d4e5f6a7b8c" target="_blank">View industrial map →</a></div>
+                <div class="highlight-card"><a href="https://memorialholodomor.org.ua/en/map" target="_blank"><h4>H4: Blacklist Clustering</h4></a><p>Villages cut off from food cluster in the same high‑mortality zones — direct evidence of deliberate starvation.</p><a href="https://memorialholodomor.org.ua/en/map" target="_blank">Open memorial map →</a></div>
             </div>
         </section>
 
@@ -432,13 +414,13 @@
                     </div>
                     <div id="map4" class="map-container"></div>
                     <div class="map-note">
-                        <strong>Analysis:</strong> Museums and memorials preserve the memory of the victims. Click on a marker for details.
+                        <strong>Analysis:</strong> Museums and memorials preserve the memory of the victims. Click on a marker for details. Coordinates are approximate and based on known locations.
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TIMELINE MAP (interactive) -->
+        <!-- TIMELINE MAP -->
         <section id="timeline" class="section">
             <h2 class="section-title">Temporal‑Spatial Progression: 1931–1934</h2>
             <div class="timeline-container">
@@ -470,7 +452,7 @@
             <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
                 <div style="flex: 1 1 300px;">
                     <table class="data-table">
-                        迈<th>City / Oblast</th><th>Mortality %</th>迈
+                        麦<th>City / Oblast</th><th>Mortality %</th>麦
                         麦<td>Poltava</td><td>45–55%</td> </tr>
                         <tr><td>Cherkasy</td><td>40–50%</td></tr>
                         <tr><td>Kyiv</td><td>35–45%</td></tr>
@@ -499,17 +481,16 @@
             </div>
         </section>
 
-        <!-- LEGACY SECTION -->
+        <!-- LEGACY SECTION (with one memorial picture) -->
         <section class="section">
             <h2 class="section-title">Legacy of Remembrance</h2>
             <p style="margin-bottom:1rem;">Today, the Holodomor is commemorated through museums, memorials, and educational initiatives across Ukraine and the world. The <strong>National Museum of the Holodomor-Genocide</strong> in Kyiv stands as the central institution, featuring a symbolic "Candle of Memory" and a vast collection of artifacts, survivor testimonies, and archival documents. Every year on the fourth Saturday of November, Ukrainians light candles in their windows to honor the victims. International efforts, such as the <strong>Holodomor Research and Education Consortium</strong> and the <strong>Harvard MAPA project</strong>, continue to document and teach this history, ensuring that future generations understand the dangers of denial and authoritarianism.</p>
-            <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1rem;">
+            <div style="display:flex; justify-content:center; margin-top:1rem;">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Holodomor_Museum_Kyiv.jpg/800px-Holodomor_Museum_Kyiv.jpg" alt="Holodomor Museum Kyiv" style="width:300px; border-radius:12px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Holodomor_Memorial_Candle.jpg/800px-Holodomor_Memorial_Candle.jpg" alt="Candle of Memory" style="width:300px; border-radius:12px;">
             </div>
         </section>
 
-        <!-- SPIN WHEEL -->
+        <!-- SPIN WHEEL (10 facts) -->
         <section class="section">
             <h2 class="section-title"><i class="fas fa-cog"></i> Spin to Discover Hidden Facts</h2>
             <div class="wheel-section">
@@ -642,7 +623,7 @@
 
         // Load GeoJSON for timeline map
         const geojsonUrl = './ukraine_oblasts.geojson.geojson';
-        let globalGeoJSONData = null; // store for spatial maps
+        let globalGeoJSONData = null;
         fetch(geojsonUrl)
             .then(r => r.json())
             .then(data => {
@@ -671,7 +652,7 @@
                     return div;
                 };
                 legend.addTo(mortalityMap);
-                // After timeline map loads, also initialize spatial maps if they are ready
+                // After timeline map loads, initialize spatial maps
                 if (typeof initSpatialMaps === 'function') initSpatialMaps();
             })
             .catch(err => console.error('GeoJSON load error', err));
@@ -712,7 +693,7 @@
         });
 
         // ============================================
-        // SPIN WHEEL
+        // SPIN WHEEL (10 facts)
         // ============================================
         const facts = [
             "The word 'Holodomor' was not used publicly until the 1980s; before that, it was a forbidden topic in the USSR.",
@@ -803,7 +784,7 @@
         // SPATIAL EVIDENCE MAPS (uses globalGeoJSONData)
         // ============================================
         function initSpatialMaps() {
-            if (!globalGeoJSONData) return; // wait for data
+            if (!globalGeoJSONData) return;
             const data = globalGeoJSONData;
 
             // Map 1: Excess Deaths (1933)
