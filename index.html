@@ -3,18 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Holodomor: Spatial Analysis of Genocide</title>
+    <title>Holodomor: Spatial Analysis - Part 1</title>
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <!-- noUiSlider for timeline -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -23,6 +15,7 @@
             color: #1e293b;
             line-height: 1.6;
         }
+        /* Sticky navigation */
         .nav-bar {
             position: sticky;
             top: 0;
@@ -44,6 +37,7 @@
             transition: 0.2s;
         }
         .nav-bar a:hover { background: #b22222; }
+        /* Landing */
         .hero {
             position: relative;
             height: 100vh;
@@ -197,8 +191,151 @@
             object-fit: cover;
         }
         .map-note { padding: 1rem; background: #f8fafc; font-size: 0.9rem; border-top: 1px solid #cbd5e1; }
-        .chart-row { display: flex; flex-wrap: wrap; gap: 2rem; }
-        .chart-box { flex: 1 1 400px; height: 300px; }
+        .container { max-width: 1400px; margin: 2rem auto; padding: 0 2rem; }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-bar { gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky navigation -->
+    <div class="nav-bar">
+        <a href="#intro">Intro</a>
+        <a href="#hypotheses">Hypotheses</a>
+        <a href="#statistics">Statistics</a>
+        <a href="#highlights">Highlights</a>
+        <a href="#maps">Evidence Maps</a>
+    </div>
+
+    <!-- LANDING -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Holodomor: A Spatial Analysis</h1>
+            <p>Understanding where and why the famine struck hardest</p>
+            <div class="scroll-indicator" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'});">↓</div>
+        </div>
+    </section>
+
+    <!-- INTRO (with images) -->
+    <section id="intro" class="intro-section">
+        <h2>The Geography of Genocide</h2>
+        <p>The Holodomor (from Ukrainian <em>moryty holodom</em> – "to kill by starvation") was a man-made famine that killed an estimated <strong>3.9 million Ukrainians</strong> in 1932–1933. This was not a natural disaster. It was the direct result of Soviet policies under Joseph Stalin: forced collectivization of agriculture, ruthless grain seizures, the closure of Ukraine's borders, and the systematic suppression of Ukrainian identity.<br><br>Using Geographic Information Systems (GIS), researchers at the Harvard Ukrainian Research Institute have mapped population losses at the district level, revealing a clear pattern: the deadliest areas were the grain-producing regions of central, eastern, and southern Ukraine—the fertile black soil belt—where Soviet grain quotas were highest and enforcement most brutal. In contrast, northern forested regions (Polissia) experienced lower mortality because they were less integrated into the grain economy.</p>
+        <div class="intro-images">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Black_soil_map_Ukraine.png/800px-Black_soil_map_Ukraine.png" alt="Black soil belt">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Holodomor_1933_Children.jpg" alt="Starving children">
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- HYPOTHESES SECTION -->
+        <section id="hypotheses" class="section">
+            <h2 class="section-title">Testing the Genocide Hypothesis</h2>
+            <p style="margin-bottom:1.5rem; font-size:1.1rem;">The Holodomor was not a natural famine. By examining spatial patterns—where the famine was worst and where it was milder—we can test four key hypotheses. Each hypothesis is supported by statistical correlations and historical documentation. Together they provide compelling evidence that the famine was a deliberate, ethnically targeted genocide.</p>
+            <div class="hypothesis-grid">
+                <div class="hypothesis-card"><h3><i class="fas fa-tractor"></i> H1: Agricultural Targeting</h3><p>Mortality rates are highest in the black‑soil belt (Poltava, Cherkasy, Kyiv, Kharkiv) where Soviet grain quotas were extreme. This suggests the famine was engineered to extract grain, not caused by drought.</p></div>
+                <div class="hypothesis-card"><h3><i class="fas fa-users"></i> H2: Ethnic Targeting</h3><p>Areas with higher percentages of ethnic Ukrainians suffered significantly greater losses, even when controlling for agricultural productivity — a hallmark of genocide.</p></div>
+                <div class="hypothesis-card"><h3><i class="fas fa-industry"></i> H3: Industrial Protection</h3><p>The Donbas industrial region, with its mixed population and vital coal/steel industries, was partially spared due to state rations, showing that starvation was selectively applied.</p></div>
+                <div class="hypothesis-card"><h3><i class="fas fa-skull"></i> H4: Blacklist Clustering</h3><p>Villages placed on Soviet “Black Lists” (cut off from food) cluster in the same agricultural heartland — direct evidence of deliberate starvation.</p></div>
+            </div>
+        </section>
+
+        <!-- KEY STATISTICS -->
+        <section id="statistics" class="section">
+            <h2 class="section-title">Key Statistics</h2>
+            <div class="stats-row">
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line"></i></div><div class="stat-number">3.9M</div><div class="stat-label">Excess Deaths</div><div class="stat-source">Wolowyna et al., 2016</div><a href="https://www.huri.harvard.edu/news/newly-mapped-data-leads-new-insights" class="stat-link" target="_blank">Learn more</a><p style="font-size:0.8rem; margin-top:0.75rem;">Total direct losses from starvation and associated diseases, not counting lost births.</p></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-map-marked-alt"></i></div><div class="stat-number">50%+</div><div class="stat-label">Rural Losses (Poltava)</div><div class="stat-source">HURI MAPA</div><a href="https://gis.huri.harvard.edu/population-losses" class="stat-link" target="_blank">View map</a><p style="font-size:0.8rem; margin-top:0.75rem;">In districts like Hlobyne, more than half the rural population perished.</p></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-industry"></i></div><div class="stat-number">12%</div><div class="stat-label">Donbas Mortality</div><div class="stat-source">UNIAN 2015</div><a href="https://www.unian.info/society/1194991-kyiv-and-kharkiv-regions-most-affected-by-holodomor-of-1932-33-study.html" class="stat-link" target="_blank">Read study</a><p style="font-size:0.8rem; margin-top:0.75rem;">Industrial workers received rations, lowering death rates compared to agricultural regions.</p></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-globe-americas"></i></div><div class="stat-number">30+</div><div class="stat-label">Countries Recognizing Genocide</div><div class="stat-source">HREC</div><a href="https://holodomor.ca/international-recognition/" class="stat-link" target="_blank">See list</a><p style="font-size:0.8rem; margin-top:0.75rem;">Including Canada, Poland, Lithuania, and the United States.</p></div>
+            </div>
+        </section>
+
+        <!-- VISUAL HIGHLIGHTS (with working images) -->
+        <section id="highlights" class="section">
+            <h2 class="section-title">Visual Highlights</h2>
+            <p>Quick insights into the spatial data behind the hypotheses. Click on any image to explore the full interactive map (external links).</p>
+            <div class="highlights-grid">
+                <div class="highlight-card"><a href="https://gis.huri.harvard.edu/population-losses" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Holodomor_map_1932-33.png/800px-Holodomor_map_1932-33.png" alt="Mortality map preview"></a><h4>H1: Agricultural Targeting</h4><p>Dark red areas (Poltava, Cherkasy) show >50% rural losses — directly overlapping the black soil belt.</p><a href="https://gis.huri.harvard.edu/population-losses" target="_blank">Open interactive map →</a></div>
+                <div class="highlight-card"><a href="https://holodomor.ca/resources/maps/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Black_soil_map_Ukraine.png/800px-Black_soil_map_Ukraine.png" alt="Grain quotas preview"></a><h4>H2: Ethnic Targeting</h4><p>Grain quotas were highest where ethnic Ukrainians were concentrated, correlating with mortality (r=0.71).</p><a href="https://holodomor.ca/resources/maps/" target="_blank">Explore HREC maps →</a></div>
+                <div class="highlight-card"><a href="https://www.arcgis.com/home/item.html?id=3d1c8f5b8a5e4f8e9b2c3d4e5f6a7b8c" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Donbas_industrial_region.png/800px-Donbas_industrial_region.png" alt="Donbas industrial region"></a><h4>H3: Industrial Protection</h4><p>Donbas (Donetsk, Luhansk) had mortality below 15% — a stark contrast to agricultural regions.</p><a href="https://www.arcgis.com/home/item.html?id=3d1c8f5b8a5e4f8e9b2c3d4e5f6a7b8c" target="_blank">View industrial map →</a></div>
+                <div class="highlight-card"><a href="https://memorialholodomor.org.ua/en/map" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Holodomor_memorial_Kyiv.jpg/800px-Holodomor_memorial_Kyiv.jpg" alt="Blacklist map preview"></a><h4>H4: Blacklist Clustering</h4><p>Villages cut off from food cluster in the same high‑mortality zones — direct evidence of deliberate starvation.</p><a href="https://memorialholodomor.org.ua/en/map" target="_blank">Open memorial map →</a></div>
+            </div>
+        </section>
+
+        <!-- SPATIAL EVIDENCE MAPS (four static map cards) -->
+        <section id="maps" class="section">
+            <h2 class="section-title">Spatial Evidence Maps</h2>
+            <p style="margin-bottom:1.5rem;">Click any map to open the full interactive version from the authoritative source. These maps allow you to explore the data in detail.</p>
+            <div class="map-grid">
+                <div class="map-item">
+                    <div class="map-header"><h4>Excess Deaths by Raion (1932–1934)</h4><p>Source: Harvard MAPA Project</p></div>
+                    <div class="map-container"><a href="https://gis.huri.harvard.edu/population-losses" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Holodomor_map_1932-33.png/800px-Holodomor_map_1932-33.png" alt="Mortality map"></a></div>
+                    <div class="map-note"><strong>Analysis:</strong> Dark red areas (Poltava, Cherkasy) show >50% rural losses. <a href="https://gis.huri.harvard.edu/population-losses" target="_blank">Open interactive map →</a></div>
+                </div>
+                <div class="map-item">
+                    <div class="map-header"><h4>Grain Requisition Targets (1932)</h4><p>Source: Holodomor Research and Education Consortium</p></div>
+                    <div class="map-container"><a href="https://holodomor.ca/resources/maps/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Black_soil_map_Ukraine.png/800px-Black_soil_map_Ukraine.png" alt="Grain quotas map"></a></div>
+                    <div class="map-note"><strong>Analysis:</strong> Quota size strongly correlates with mortality (r²=0.78). <a href="https://holodomor.ca/resources/maps/" target="_blank">Explore at HREC →</a></div>
+                </div>
+                <div class="map-item">
+                    <div class="map-header"><h4>"Black List" Villages (Чорні дошки)</h4><p>Source: Holodomor Museum</p></div>
+                    <div class="map-container"><a href="https://memorialholodomor.org.ua/en/map" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Holodomor_memorial_Kyiv.jpg/800px-Holodomor_memorial_Kyiv.jpg" alt="Blacklist map"></a></div>
+                    <div class="map-note"><strong>Analysis:</strong> Blacklisted villages cluster in ethnic Ukrainian agricultural regions. <a href="https://memorialholodomor.org.ua/en/map" target="_blank">Open interactive map →</a></div>
+                </div>
+                <div class="map-item">
+                    <div class="map-header"><h4>Survivor Testimonies by Village</h4><p>Source: Harvard Ukrainian Research Institute</p></div>
+                    <div class="map-container"><a href="https://gis.huri.harvard.edu/oral-history" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Holodomor_1933_Children.jpg/800px-Holodomor_1933_Children.jpg" alt="Oral history map"></a></div>
+                    <div class="map-note"><strong>Analysis:</strong> Testimonies of cannibalism, deportation cluster in highest mortality zones. <a href="https://gis.huri.harvard.edu/oral-history" target="_blank">Explore at Harvard →</a></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer" style="background: #0b1e33; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+        <p>Holodomor Spatial Analysis Project | Part 1 – Foundations</p>
+        <p style="margin-top:0.5rem; font-size:0.8rem;">Data: Harvard MAPA, Wolowyna-Levchuk, Central State Archive of Ukraine</p>
+        <p><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="color: #ffd700;">↑ Back to top</a></p>
+    </footer>
+</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Holodomor: Spatial Analysis - Part 2 (Interactive)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f7fb url('https://www.transparenttextures.com/patterns/linen.png') repeat;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .container { max-width: 1400px; margin: 2rem auto; padding: 0 2rem; }
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0b1e33;
+            margin-bottom: 1.5rem;
+            border-left: 6px solid #b22222;
+            padding-left: 1rem;
+        }
         .timeline-container {
             background: #f1f5f9;
             border-radius: 16px;
@@ -235,15 +372,8 @@
         }
         .data-table th { background: #1e293b; color: white; padding: 1rem; text-align: left; }
         .data-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #e2e8f0; }
-        .bib-list { list-style: none; padding: 0; }
-        .bib-list li { margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px dashed #cbd5e1; }
-        .footer {
-            background: #0b1e33;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
+        .chart-row { display: flex; flex-wrap: wrap; gap: 2rem; }
+        .chart-box { flex: 1 1 400px; height: 300px; }
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
@@ -299,249 +429,379 @@
             transition: 0.2s;
             margin-top: 1rem;
         }
-        .container { max-width: 1400px; margin: 2rem auto; padding: 0 2rem; }
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .nav-bar { gap: 0.5rem; }
+        .bib-list { list-style: none; padding: 0; }
+        .bib-list li { margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px dashed #cbd5e1; }
+        .bib-list a { color: #2563eb; text-decoration: none; }
+        .footer {
+            background: #0b1e33;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
         }
+        .note { padding: 0.75rem 1.5rem; background: #fef9e3; font-size: 0.95rem; margin-top: 1rem; border-radius: 8px; }
+        @media (max-width: 768px) { .map-container-full { height: 400px; } }
     </style>
 </head>
 <body>
-    <div class="nav-bar">
-        <a href="#intro">Intro</a>
-        <a href="#hypotheses">Hypotheses</a>
-        <a href="#statistics">Statistics</a>
-        <a href="#map">Map</a>
-        <a href="#evidence">Evidence</a>
-        <a href="#sources">Sources</a>
-    </div>
-
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Holodomor: A Spatial Analysis</h1>
-            <p>Understanding where and why the famine struck hardest</p>
-            <div class="scroll-indicator" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'});">↓</div>
+<div class="container">
+    <!-- INTERACTIVE MORTALITY MAP (with timeline) -->
+    <section class="section">
+        <h2 class="section-title">Temporal‑Spatial Progression: 1931–1934</h2>
+        <div class="timeline-container">
+            <div id="year-display">1932.0</div>
+            <div id="timeline-slider"></div>
+            <div class="timeline-labels"><span>1931</span><span>1932</span><span>1933</span><span>1934</span></div>
+            <div id="year-description" class="year-description">
+                <strong>1932: Famine begins</strong> – Starvation spreads; borders sealed; blacklists introduced; first reports of cannibalism.
+            </div>
+        </div>
+        <div id="mortalityMap" class="map-container-full"></div>
+        <div class="note" id="summaryText">
+            📌 Most affected regions (1932): Poltava (35%), Cherkasy (30%), Kyiv (28%), Kharkiv (28%)
         </div>
     </section>
 
-    <section id="intro" class="intro-section">
-        <h2>The Geography of Genocide</h2>
-        <p>The Holodomor (from Ukrainian <em>moryty holodom</em> – "to kill by starvation") was a man-made famine that killed an estimated <strong>3.9 million Ukrainians</strong> in 1932–1933. This was not a natural disaster. It was the direct result of Soviet policies under Joseph Stalin: forced collectivization of agriculture, ruthless grain seizures, the closure of Ukraine's borders, and the systematic suppression of Ukrainian identity.<br><br>Using Geographic Information Systems (GIS), researchers at the Harvard Ukrainian Research Institute have mapped population losses at the district level, revealing a clear pattern: the deadliest areas were the grain-producing regions of central, eastern, and southern Ukraine—the fertile black soil belt—where Soviet grain quotas were highest and enforcement most brutal. In contrast, northern forested regions (Polissia) experienced lower mortality because they were less integrated into the grain economy.</p>
-        <div class="intro-images">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Black_soil_map_Ukraine.png/800px-Black_soil_map_Ukraine.png" alt="Black soil belt">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Holodomor_1933_Children.jpg" alt="Starving children">
+    <!-- YOUTUBE VIDEO -->
+    <section class="section">
+        <h2 class="section-title">Documentary & Testimonies</h2>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/YXxYl6rJkWU" title="Holodomor documentary" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p style="margin-top:1rem;">A powerful documentary by the Holodomor Museum. Click to watch survivor testimonies and historical analysis.</p>
+    </section>
+
+    <!-- URBAN MORTALITY TABLE & CHART -->
+    <section class="section">
+        <h2 class="section-title">Urban Mortality Rates</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+            <div style="flex: 1 1 300px;">
+                <table class="data-table">
+                    <tr><th>City / Oblast</th><th>Mortality %</th></tr>
+                    <tr><td>Poltava</td><td>45–55%</td></tr>
+                    <tr><td>Cherkasy</td><td>40–50%</td></tr>
+                    <tr><td>Kyiv</td><td>35–45%</td></tr>
+                    <tr><td>Kharkiv</td><td>35–45%</td></tr>
+                    <tr><td>Dnipro</td><td>30–40%</td></tr>
+                    <tr><td>Odesa</td><td>25–35%</td></tr>
+                    <tr><td>Donetsk</td><td>10–15%</td></tr>
+                </table>
+            </div>
+            <div style="flex: 1 1 400px;"><canvas id="mortalityChart" width="400" height="300"></canvas></div>
         </div>
     </section>
 
-    <div class="container">
-        <section id="hypotheses" class="section">
-            <h2 class="section-title">Testing the Genocide Hypothesis</h2>
-            <p style="margin-bottom:1.5rem; font-size:1.1rem;">The Holodomor was not a natural famine. By examining spatial patterns—where the famine was worst and where it was milder—we can test four key hypotheses. Each hypothesis is supported by statistical correlations and historical documentation. Together they provide compelling evidence that the famine was a deliberate, ethnically targeted genocide.</p>
-            <div class="hypothesis-grid">
-                <div class="hypothesis-card"><h3><i class="fas fa-tractor"></i> H1: Agricultural Targeting</h3><p>Mortality rates are highest in the black‑soil belt (Poltava, Cherkasy, Kyiv, Kharkiv) where Soviet grain quotas were extreme. This suggests the famine was engineered to extract grain, not caused by drought.</p></div>
-                <div class="hypothesis-card"><h3><i class="fas fa-users"></i> H2: Ethnic Targeting</h3><p>Areas with higher percentages of ethnic Ukrainians suffered significantly greater losses, even when controlling for agricultural productivity — a hallmark of genocide.</p></div>
-                <div class="hypothesis-card"><h3><i class="fas fa-industry"></i> H3: Industrial Protection</h3><p>The Donbas industrial region, with its mixed population and vital coal/steel industries, was partially spared due to state rations, showing that starvation was selectively applied.</p></div>
-                <div class="hypothesis-card"><h3><i class="fas fa-skull"></i> H4: Blacklist Clustering</h3><p>Villages placed on Soviet “Black Lists” (cut off from food) cluster in the same agricultural heartland — direct evidence of deliberate starvation.</p></div>
+    <!-- STATISTICAL EVIDENCE -->
+    <section class="section">
+        <h2 class="section-title">Statistical Evidence of Deliberate Targeting</h2>
+        <div class="chart-row">
+            <div class="chart-box"><canvas id="scatterChart"></canvas></div>
+            <div style="flex: 1 1 300px; background:#f1f5f9; border-radius:16px; padding:1.5rem;">
+                <h3 style="color:#b22222; margin-bottom:1rem;">Correlation Results</h3>
+                <p><strong>Grain quota vs. mortality:</strong> r = 0.83 (p < 0.001)<br>This indicates a very strong positive relationship — the higher the grain quota assigned to a region, the more people died.</p>
+                <p><strong>Ethnic Ukrainian % vs. mortality:</strong> r = 0.71 (p < 0.001)<br>Even after controlling for agricultural productivity, areas with a larger Ukrainian population experienced significantly higher mortality.</p>
+                <p style="margin-top:1rem; font-size:0.9rem;">Source: Wolowyna et al. (2016), Harvard MAPA project.</p>
+                <p>These statistical findings align with the four spatial hypotheses and provide quantitative proof that the famine was engineered as a tool of genocide.</p>
             </div>
-        </section>
-
-        <section id="statistics" class="section">
-            <h2 class="section-title">Key Statistics</h2>
-            <div class="stats-row">
-                <div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line"></i></div><div class="stat-number">3.9M</div><div class="stat-label">Excess Deaths</div><div class="stat-source">Wolowyna et al., 2016</div><a href="https://www.huri.harvard.edu/news/newly-mapped-data-leads-new-insights" class="stat-link" target="_blank">Learn more</a><p style="font-size:0.8rem; margin-top:0.75rem;">Total direct losses from starvation and associated diseases, not counting lost births.</p></div>
-                <div class="stat-card"><div class="stat-icon"><i class="fas fa-map-marked-alt"></i></div><div class="stat-number">50%+</div><div class="stat-label">Rural Losses (Poltava)</div><div class="stat-source">HURI MAPA</div><a href="https://gis.huri.harvard.edu/population-losses" class="stat-link" target="_blank">View map</a><p style="font-size:0.8rem; margin-top:0.75rem;">In districts like Hlobyne, more than half the rural population perished.</p></div>
-                <div class="stat-card"><div class="stat-icon"><i class="fas fa-industry"></i></div><div class="stat-number">12%</div><div class="stat-label">Donbas Mortality</div><div class="stat-source">UNIAN 2015</div><a href="https://www.unian.info/society/1194991-kyiv-and-kharkiv-regions-most-affected-by-holodomor-of-1932-33-study.html" class="stat-link" target="_blank">Read study</a><p style="font-size:0.8rem; margin-top:0.75rem;">Industrial workers received rations, lowering death rates compared to agricultural regions.</p></div>
-                <div class="stat-card"><div class="stat-icon"><i class="fas fa-globe-americas"></i></div><div class="stat-number">30+</div><div class="stat-label">Countries Recognizing Genocide</div><div class="stat-source">HREC</div><a href="https://holodomor.ca/international-recognition/" class="stat-link" target="_blank">See list</a><p style="font-size:0.8rem; margin-top:0.75rem;">Including Canada, Poland, Lithuania, and the United States.</p></div>
-            </div>
-        </section>
-
-        <!-- VISUAL EVIDENCE GRID (updated with new images) -->
-        <section class="section">
-            <h2 class="section-title">Visual Evidence</h2>
-            <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <!-- Card 1: Starving children (original) -->
-                <div class="grid-item" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Holodomor_1933_Children.jpg" alt="Starving children" style="width:100%; height:250px; object-fit:cover;">
-                    <p class="grid-caption" style="padding: 1rem 1rem 0; font-weight:600;">Starving children, 1933</p>
-                    <p style="padding: 0 1rem;">Source: Central State Archive of Ukraine</p>
-                </div>
-                <!-- Card 2: New historical photo (base64) -->
-                <div class="grid-item" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhIWFRUXFxgaGBgYFxcYGBoYGRodGBgaGBkaHSggGBolHxodITEiJSkrLi4uGh8zODMtNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAMIBAwMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAFAAMEBgcCAQj/xABAEAABAwIEAwUFBgUCBgMAAAABAgMRACEEEjFBBVFhBiJxgZETMqGxwUJSYtHh8AcUI3LxgrIVFiQzU3NDosL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A2VxFeBmuW1ELCTuJNTUigYSxXSkRTsVReP8AH8Wh1aUFGVKyE92dNJNBdSrpXjqwCBFZh/ztjW1ZlIQ4NCNPpUtj+JSwf62GPUpIJ+dBoCsSgRTrTiVe6Zqip/iPgyQFBaJP2hEDmdjRfBdosGuQh9sdZg33H60FnyV4W6D8Sx0t5UupBPuqSrUjmBfl8anYZ9wAZ0iDF556Dr/igkexptWHFCe0fE3UKyMKSlSW1unMkqCgiO6LiJnXa1GcE6VtoUoQVJBI8RNBGcwwqFieFpOtGlgb16UigpuM7MJIoHjuy6hOU1phaFcKw4oMdd4RiG/dUoeBIqEeKYxnfNGyhWzP8PSRpWe9p1LbfWlDSlISBMIzASJMxegBMdqlzKm45xzqe1xPDPXMIVrBlM87jeoSsQwuMzYBP3THwVFdM8IadOVtUK5ER6bUBnBuqgeyezAbGFiPO9eqUqT7RoG3vNkpVI2I/Wg57MvIumx6TXmfFtG5kfiE0BVGKzd32pTH2XUjlpNvrUk50RIVl2KSHEka3Bv6UIa42oEB1oEbx+RqYxi8Oo9xSmjykpH5UBA4kT3Mp/tVBjqg2qQw5J0AVGg7s/6TKT5VBVh1HXI6PRQ8xammnvZq7wcSk/eGdP1+lBZcG9F5gnSRHwNvQijTGJ56x6+H6E1VcPiAqAlSSPwK+aFUSw7l4zARsZT6TY0FlZckX1p6heCdMX/f0+VEEOgiaBylSpUCpUqVA17ETO9ORyr2vIoOVqgV818dxzgxD5Di7vObmPfNfSClEg2jxjnXzNxBlZfcMauOf7jQNN9ocQn/AOQ+cH512O0rt82VUzqKEYhMKInTWuGjeKA03xrPAUyjyJH1q2HgCSUlCgQoToI+VUnhLQLiB+NPxNbs5wtCMiQLZQPQkk+VAD7Odm0pWleYhQNiDEHmOtaelJiFQbX61V8AyErBNgL1a6CFjuHNugpWkEEEHnB1E6in22coAToLCdhypyb17QKuckSedd0qDlJ8P0rqm1jSI/fKm1YgWgyDv46UD6jVI43iVtvvj2ZUFxBuPsRvr5VcWl21k1W+Jds2GMQtlwLzDLoUkXEiBMjWgBuuMuNJbWkgjJ7yZBykSJE0OwGHQnibXsYCDAhNgZF7VZB2hwD8e0GQ66FPj3k6ipPDuG4NbiVs4gKKVBQAUkmxncTQHjgU8qjucKSqZTRWlQVnGdmm1fZqv43sbM5a0UmhWJ41h0OFtxeRQ+8CBfrpQZs5wB9pWZsqBHL8qdb4u+g5XUZx4Qa0xPs1julKh0IPyph3hDajJSCaDPzicM4O8C2rmRp0kUUwiFQMj+YcjCh6G9GsT2YaM92oP/KmUyk/pQILWiSUX/AYttY2mpuG4mIgG9jChlMb30NRF8IfSDDhgc7g+tQHF4htQzNhYmDbUdTQXXCYnOP39Kk1XOH8VaSO8lTZ3j9KN4fFoUJCgfnQSKVchVKg6rxU7V7SoG12kzXz5xNlOVaoSCHFEnOQSDcwOVb9jSrIuIFjr4V8/nhr6+6UxmMX0E31jQ0FPeTKiY1605h2L70/xHDFpRQtMKBvf0jYim8GsZhIPrQEOBNn2jcRdxG34hW74d1RWpBTCUJRCpupapJA6ARWFcEEOtR/5Ea/3Ct04biQr2hiDni/gKDx1d1g2TlmfEX8KzfF9o8Sp5RW853VKSkJWAkJBtGk233q39p+IttIcClgKWkgJFzprbQdaz7HcVaU8FNIUhICZJuVKGqyNp+lBrf8O8e88wtTyioBQCFK96MoJBI1AJsatQql9jO1GFUwhGf2a4ghVsxFpB0vVuZdkAnpQSKVNZ+VdoVQeiuQga1485lExPSuWV89eVB4lNyelhpWH9vDmxmIUfvAeiQK3RafHyrD+1oSX3yP/Ir5xQPdjuGpdaczbKG19Jq+dnOEtoUghIzA6xeqx/DZP9B6wPfTHO4P5VeOFg+0H72oD6jauUmllpKRNB0azLt2/OKIyFQCU+7qIG/OtNIrIO0L59o8RP8A8sEcy4belB52ZyrxTTaVLF5ULggATryrXG1Vk3YRU8QT/wCj/wDIrTHV90kbX19aCv8AEu0j7T7iAgLCTppAiRPWjfZ3jP8AMoKshTlMGYgneKyx/Fe1xjmckZlESFEaC1SOzfaB5kLDSwQV3zCek0GqcS4i0wmXFAToNzQprtDh1mII61nHaLjLjyitZEyEiNAByFQ8DiVXKSPMxQbKcE04Mwg9RXC+EJMnc1Q+y3G3VvNthSk5lwoC4Mam/StPFAOHD1DRZA8TSolSoPJrxS6SxTSjvvQQu0LhThniLkIVHp0rJ2sZ3CQdEE+g5b1onbHiCkYN5QP2CJgkAEeO8xNY9g8XKesetBA7aLCvYrIuQQT4QR8zVewq+8PGi3HlzhQo6pWmPOxquYd248RQWLgjkOtTs4n0zVryeKpYZxDqogKEDdSsohPr9axXhK4dQeSx/umj3aLia1ulvN3Qc0fiIifQUDPEscXFlbhlSySek7DoKjBceBt4fpUB7NmlRqWw7zoCeAWU3vvbatQ7AcfLrPsF3UkSkzqjcHfu/I1kzQMEA90QNbjNpA3ohwh9xhSXEuhJSZBNhImxvvEUG+tqM6R0/KpSba0F/mVYhkHCPtpcISrNZwaXBANr2npUH/mR/D2x2GKR/wCZnvtGLyR7yfOgs7nPf86ZQ3K5VsTHSN6ZwHFGMQkKacSqbwCM3gRqKIAUCVWH9oE99wncnb8VbZiFQk+BrFH3nFgFQTPe0Im4A9LUFg/h0n+i9/7Ej4GrxwuM4A61keF4ktrNkKhpZN0mJuQK1DsssqCCr3vZjN4kCgsKDzro01AFdkig9JgVjeOeX/UWIlMrE/eKlT42Fa9jHciFK+6lR9BN6xjFYqWiogEqAzRa571uWpoC38PQVY51RFw0npcxtV9xjhS2q32T8qofYV0IxrwOqglI6kJKj8BV17RrUlhRCSSbepj4a0GUNNhWIfJEZAVW3INNcNaUlvOoQDKgCQFEDkNfOOtP4ZyXcRAJzSnYRJ3Ji1B8cpW8K6ibbCKB7D4wFwEgEFc5T8qsbSm5MNpg2tYTO9qpYcve1T2+IrCYkQRrA+dBcuzA/wCvaITlHfVA5BOUGOv1rU23JrLewzi3MW0tZkhlcGNhAg9b/KtObTFBKFKkDSoOSrlQxeLPtVtQEwkQuRcnaOnOpKmUlw2VOW5BIBE6a164kIScoHqTf40FY7ZBSeGve0uvKkd3nIE6XHjWW8MYBCfA1on8Snz/ACDi0kjMECIIPvA3kTWNZ1kABSh5kb0EfieI/wCkUCr7SQJ1kKmgeFiRzmiGJylhaT7yXZ3vNtfCfShmFnOnxoDHCv8AuIB1zi/nVuxPBQ626tP/AHUOW/EIFvyqpcEu42T98f7q0zhbXdeSQffB/wDrb5UGfhKV91ZykaWv4U57C1dcdUC8o9dbba6a33rkvd2+3yoPQ0MwklPUbcqkcPflSUkyQSL6G5g+lR0rmaZaUA4fI0Gm9nOFMOtvSAl9KCtCm1KQQQNDlIBExY0uIYd91TWEw+Lcc9u37Rxt0goaTrBWBmAJtEcudBuzvFFtqzJSSAlWaBonKQSeg1q5fwowaSH34EnI2IH2UiZ6kkyZ5UEDibrzUfznChaAHsOsonYXRPlmppjtRiGVKR7VbUDut4oKKjuQHC2AmOvLetPxTCHEKbUMyVpKVDmCINZ32u4wpeCbwilS6p4tOneGDKldMwyn/VQC8Z22fcAUVuNoAMFASQZ3VuR0igTTxcQopeZShA1UFAyZOUHUkxItTuPUEpIiAU6clDT1HyoCnDpUnvuKSMxslMlRN4J5bUEwOLbWRDRIm6VHXbeQOsVZOF9rsWhSUgMgkhOYlWQJ1JUoi0RpBmaoznDCpa1d694ULiReeVHOx3Ay9iCyhxKDknMWwuRaRBPPfpQaG32xKF/9Q4w4mLFgrkaTOdIB52M1bMBxNp5GZp1DgTqUqBgkfa5HxrK+CdnlO4l9tD4LbIhTqWkHMv7iUqkc79OtW3hvYXDJSCsvrkyUKWECeqWwB6k0EP8AiZxtacjDaimUlSyDEgykJPQ3PpVHfCiylI3SknTUDX0ird/ErAnM28B3SC2Z2NynyN/SqQqZyk3AAtcaQT8KCfwDFqGLbc0P8w1PQHunxEEith4vdtQ6ViXDkezdbUrQPNEnllUJHpetvxfuqkxY38BQYbiHwSoiwKiR5nWoL7pmun1AyRpt4bVDf28aCQygKUEqMSQJ1PKnsRgshEyJsQY16fOoIlKs/LTxroulSgVXVbzoL12Bx2XFoQdHAR55dfhWsBe3hWLdkFRi2eigfKL1sZd36iglzSqOt8A617QSFr/fhQHFdpsOy8GVryld5JFpsAoWymedDMT28w7bqmlJcCESn2nvAqG0XVE2mssxuMU84pwgd8qUZ/ESYoNM/iK4DgSkqTC3EJK9hcEmBzjSsj9mlIWMyVCEkEHqJtVk432mSvBIwuReYZQpwqAGYR9kXNrTVFKZKooBPFVQ6oZrTI86WCT30xzFc8Sj2pkbCn8E0MyYoCPAEd9v+8f7q03CoH9UnX2ltPuiPiazLgSO83M++PSa0BjGgF0TbNN+iRpQUzHSXHCTfOr/AHUy/OU06thw95KbKk3PwqfgeArcaLmdCbKOUm8J1IjWgGYE896vPYDg7Ly3A4w24f6ZHtBMIlQXlHPT0qh8MSHHG0JN1qAvYDMQLnaK0fg3FMJw1az7ZWIcgoPs0ZUiD95RvcUFg7XOJawJZYbCFPrSylKUhEknvRGsgR50V7MIOGxK8MvIMzTakZAQkhAyGASYNr+E1mHHu3y3XG1ZAPZQW/dJSoiFKI9310qBiu1WIcUFqcWpSbBUwoA7SnbwoPoDiGLS02VrUkJAkkmBFZB2jcUrHrWpv2UtpUEHUAgAKVyWQBI8N6H8M4njMTCEB5ZSQQM0hJ2PesPGrF/ydxB1QccW0VkAHO7mVHXuGY8aCocUxH9OVdLcz+9qiMpKfZ5iO8mQTeCCZiOc/Cr7xD+H7ykQt1GeQQpKIPUQSEq6RB60H4l/D/ENkLBQsBMBSMyFyPdCkKta19YoAj6SRqIUk38LG9MJ4g6hxJZJDikBtJTrK1FJ8LHWpmIwiAy4HMyXUkd1UzJHekcpnvVX8G5mcBvew8ADHxoNv7P8JRh2G2QoQM3tBN3FnKSonbQiOUUTxXF22gAQNRYEAQbb6a1m/DcapDaW0rKYFgQbZr6671NXxFalJLig4BJhQtO0QP3FA72949maSkIspYKTMjuTPjMiDymqHg3CtYCQVKO0Ek+Q1q2cddGIQEqgRELMkiNBtbWo/C8YhhBbasoyCsaqOmu3ICgj4bALDyAtpaElxuZQoJiRJk6DWtT7R8abRh3TqSlYA0nu6/2gb1QcB2hUSgSuN7zrsRUHtFxErbdAz/cGeLDMJAINx15eFBVCoHemHNfDWu4uKbIJJHL8qD1S5HhTSXL+HyruKZLZFxQWjsfj8mIQr7snSdiK0dHaz8IiTHOsd4U4M5vHdJttztRlGKHM26fWgvmI44paiqYn/FKqk28yRdxaTuBJFKgr5UvKCYvJGsnx60mnAkSVbWEdatPaJSFJQ20yqyirMbE2ggDl+VATgVakRsJ+N9IoAPHsapCE5VC6uXTppVfONdAzSPSrJ2sw2RpJI0XEggjTfcUCSyVI7gPzNANdfUtWZRvbaPCiXDzcUw3gFlXdSZ8DRPA8PckFSYjn4bUD2AHfTeO9rVgcfSlK+93gcsbmwk3oFh8IUZZUkkGT6zSTiFLeIzSJn6UBV19OXMLQOc+nKpGGxISytQM/0jPpcAenpQjijuRu0AqIAPhcx6V3hyQwQrdPLSTeeVAuy6P6iTyM9LCfpV+XiUKRkW22sC4lIVr72WU2/Sqj2ebKFZoNv3apqeMBDoUhJSEkySLC8EjmdNedA9ieCYYpUSEpJ3GcQPDMZNdYTgWGGUeyU6fNIMczc/KpD+MccbU41iRmSCcpSiBHlvQBnjeInMXQYvBAyjnZMA+dBq/Zxx4kNoZS22kaCw8BHKrQ1iAsFJ7qh9OW8VlHAu1DWIcQhKFNPag51KTaSSiT3N5Eeoq4YrjqYacUe+heR0RAII970uPCgPJxSlJUhXvA2Jv4UPc4rOUkjvEoV/cNjQzH8YT/ADTYBspBJ8tPlQLjHERDobhQKgdYjQhQPnp1oC2OxWEeay4kolKijMVJSsDSUq1EVRHsIG3FpDjL+WFNLQpKVHKZyqjuzFV/EYmVHOLyfU3p3hbnfP4QpXiRYDzmguwGZIlKkLUDCFjKracsmFW5ULOLTeVCUkg+X61OdyPhsOaEZZGqVJkIWOunqagcYwQGVSSTYhRO6h8zBoI+LxSXBkuJtaw8qgqzhJsfLmIE9J1olw5AGZQyXGXvSInkR9r5VCxMpMD1SqfmBQGezwZcQVEkOJk5STFrgQLxNR+PYhIJbSiyhNiYBIkxvY7GhBxoRcqhQ6Anyg02viKHULUn3kpmDvJgHreggh2VU6VQsxvHyoe27vUl2JB6UEgprhSTXSXZArqaBnhzX9UA7yPC3xo8hKU6A0BGYqhA7wII5xMGjjYnpO550DqFiLCva9CaVAQTxZSs+dRUkEqSDcBRPhIoeOIkJUgpBT11/e9WVhKYILKUJAJMaU0MUlHuNJBBubKzDwNAI/4cFJAIMqvKoKSNbCb0weHFJ7kHlAjTpRZ3EZ3NEomCJIhI8dYvG+te4hLjSpW3ECQUkQQd8wsqgCYpGWAoGd9bdetRHQgfaid6KcVxYXEoMjfp66ULddzfIA/4oI2IQmJzAi+/7ioDmEvIEACQRaSbbUbDzRbIcSjNoLH1kGpOEwDYFgQdpVbymgrqeFOkAqleUykqNwehozx/Drcw/t+4pRQEO97vBQOWY3ERfaKl4xJyKDUlcE6fnQ/guIVC28RJTec2UZgdRJQd95FA3w/CezShYgT+FJ6e8dK64ilZlAyhBB1Ak9JT1vRFthKQEpQcu3eKk35E/SmHWpkKB+Ft96AEvClsQSAN4J+tDUIWRCCSM0mbERqmjTro91xNxa3w9RQ4ktuQCChdgY3/AMW8RQd8ObfaebcZgKBsZBSJscw1iDWg4pRThVOuKSlTq0pF4EgmBfncedVBGqe5mi8TE9DXvHOKqxK0oKEhKJVlJzpUo67CIG3U0BD2inHkpdXkhARIUBJGwJ8b01xB9acO5mKQpJGXIc4JUYOY+XXyAoWrDZxlgEzcCAIN0m8QNqlJ4W4EDKi34l6c7aCgDlpRIVBuOe4sflPnUvBoypWVIklPd6HnRNjhbmW6kibjKCrxsYvpUlzg7sZSsmeQA+poIacQ4knLMWUm8QSATIi421r3CcWK1Fp4QM4KYvciAJj9yakutKDeYK0TpIGg8JoZwfBFaiQmcoJ6Zj16D50HnFuIFCihAEJJvE33sKFDirijBUY5C3yrjHkmYIBPPn1odg0HMQfSgMshK7Hy8a6S0G0uCZkJA8MwJqPh26cW0efgfhegjsKK3AhI89YFTOI4dxowoGJsrLa4nXc/lXWDUlkkxKjuYjW8CncXxzM2pogKzXBnQ0DWGXan89qhsHrT50NAmH8j6FT06XtVvw7pBgwTPKqK7eL1o3C+DuusNuoWlRUmYm8aGx10oHf5hP3R6Uq79gRYzI1sKVA9hmnT3Q1Os94fAV0eDuG1kT5k/OprDgCYQqCdIkzHKdak/wDFygRAjW4g8jB+lAJR2aZEZ1KUd5J/KuMThUNqGX3dTfQ7DXTrU7E8ZEgydORCtZjlfxoXieJ5jmyKUnQxaPGAYJoPHmmlWynXmT8b0C4mhDZJvAJH7BqeeKhP3v7SCfUj6ihHEsZ7UFPdiZ0v4XoIeJxSSJyp6nfzSd6J8HdadQFBar2yzbr/AJoEIGpKTMyI8PWn+FPQv2QIlUmQQm+pmefSgMHj6WQWy1KQqMwNzsJnWoeK4ukLR3CmbEzz/tIPxoa8SZgEyRMXIk6momIOYiOYoLkMYtVstx9pRcv5qkn1pl91eXNmSkC5IUQYHQi9CGcQGyfdmCNGgD8QqofGeKFbWQWCjoJEAX+JoPEYpt9w5EqOWSVBMDz51F484lSoQMqBBBjf6Ga64OQ0QVAlKhJg3Chpbwoa68XA4km+YwbQNx84oJGA4oSBKoOkHSRy6VJefVmCxaLx86rzLikaEeBEg+RqSxxFM3SQfwmR5pP0oLN/NSUuoB0hQjUAyR4g1YQ42tMwrTYjX6VSEcT9mMyZKVapG3OQaKcF462lGUjMAbDSQep0Iv60FyAF8qJIAMkxHhAprEYpRPeWBIJgAmT4yNKreK7UoCSlKALR78/KoGK42v8AplJHeTJMaR3VX+NAR4u+ohIPuASYBk8h1JvVh4SylptJVIUrUAiytY0kRp5VT8C6Fv5nFENpyqSRuoRY9fyou/2kSlUjvc8x15ED86Ad2mwhadKgP6a7iB7pOqT8Y8+VCUYMqSXE2jWdD+tTsXxdb4UJ7uttCdhTbXE15SAAIGuwHQUDDTwtensQ6Cm++tQs1/OunFj5fGgj8QdUtUgEAADx6mmEMq5XqQ+Df4eVScIJNB4heWJkT0p9L1ioXA1qRj2xmbHQ0zhQMjg6UDDTRcUIsBVl4VxZ5tCUoVlCZAO8Ezb40G4MO8BUvDK7xAKRCj86A7/xBRuVkk6nr6V5UhrDggd1R+H1pUBgpV9nKCNJI19a5eSpRzLzEDkUwPAbCpqkTJUghMR70m9xMQAPOucUypCEy4ghUnKrXLMX5X0IoIADdiod1MT3jMfH1p97H4RaSClxOYe8g6xoDmT61GU2QMqUmYNwdtfMUyvBEiXRlnQ93bWBQBcU4tVihKU6ApkSfDagz2GeBlMKnYa0exCG1WRaAAZJk9a7cbASkZfUR9aCq4hp02UinMFwy+ZTmVWw29asQQlXS/MR+5qO9hFiQBInaPiZHwoBmMVkVCVwSBPe1van8JgF5iYEK1m+88reNEGIBByRYTJKgDzAipziiRKHErURplP0vQBH8MpBOqZMyFZRJ8Qb1Cx2CGQKAJvoCDfofGj/ALRQIzKTmn3dAfXeo2IUXCScqY2Bkz1NqCqt4xy4SmUoEE6AWjXWetQ8Phy2M8iFi1wTM7ij/FOF+0TnbjMIt03/ANQ5VXXkwSmxV0mfWg7Yaw594rWrU5ZgdKec9gEktoKFxaSZi0z1odiJhMFUTcRb4a1woEqn6bUE95KlJTzIB86jN4NRJGUmBJA5cyPKn8PmMD/NOnBwZzEHmCZ66UDGELaTJN9pBIH61OQ8lQsq4JI7qtDr8hXmHwEqBPeAI6T5VYmXSn3URsdKAWxwVxQBLkA62uB1E2qx4Ts2ykapWQNVwZPQG1QsGQtRCgRJ9PARepoaKE/ZiYknTwFAD7VYghxKEgAJTpEa3mNqBrdIvRHtIgIcmQQoSMskCLeINBQsgbkUDzTpOtPqIypiZvNuV6HlQmxA6aU6yTuYO17UEx0i0aVM4SJV5iq85iIIJTqAdedWjsiyt4EoA7piCdZE0DvERLttk1Dw9kueFEO0TAw5QtRJK5kWtb5UGTxBGRYvJFqCdwqZkVNVwnEoVmyJUCSe6ROvWvOAYJTiUrSIBJ1PLe1HPbrTJIETH4qD1nEOZRKFA7iJ+tKnUvLAjven6V7QWbCOqWMq1FOcBKYJBBJ+z18acxK099IGaIAmSO7Yab22qYxlkQ2lMEQqc15t4acq5faF4SICrEWuCbnY0FTxmEuJgQdSYgcpArlau8nUJTsVZiTzFpjSrBjGVqz5VD3RJEBNzAzE+G1B8O2Qoe0EE2MZgog8jp6+tAw67mBhKp8BJH5U0/nUBJ05kER0ipjzJTISTrGpIudCTTCMMswhZgA3IAv47DlrQQypUGUAgblQFNtOAd2CnUwND4HT/FGWMO3YG5Ft56T1+FdpwKRfKAk7/HcUFdST3gkwk66Vx7O1rkaFJg+c1OewJCJbA72wSDHWR9a6wrYFrFQvIIInlYW5UEFzheYZycp5qIj514zhNkqKt7aUTfbKiAQOo0tyNcYcKbWbiOulALxPCItJBO+Yj0i1C8Z2ZSkSAqeevxq2rxxBPd6dPHe9MLxYUDYTr+7UFKXwdZ2SPWpDHBbw5qPu6edWReITtbypg40cp+NAFxfCogoI8N6WE4eu5gW5H40QcfTPjO1SGnt51sIoBRaWNUx8qnskgRr86kNrGhPkf1r1ZJEQD5H6UEdt3KZJjrv1qUFJWIBJ0Mi/xptkok52p6BRB6gyKeP8raQts7FQzJHnb60Aji2H70a2360JxDICbVasXgwqChaFk2AB5dCBVNXjSpeTJfNGvWDagis4WSZvJmpaMNYb6x0qarAlN5A+dScPhlmISSZvH7tQAu0GGSFojT2aZG4I1+nrRvsPiA17TUklNumhqDx3DkvSUlJgTaJj9KkcKZSAQroaCR22xBccbE6JNjqJP5UDYZkgDc07xZYLxiYAAHPT9am8CRCwqfDx2oLngAW2koQkdwayNd/WTXodlUZb+NviKg/zgA77QB6VIa4hHu5iZ1sRQS141YJA08K8qAeIc49BXlBorTMSCqbyAN40jlU9OAWu6W1ECNQI66b14XlhRQko0vZOY+Z2pxlhalgqVYaCYHw0oBOMwKiCDCSCYEEGNoB06GKhYjCHKoSVbZjJV1nmPKrFjsO2kqWLqMTedPiajN4fODcfigqB8IifWgrP8qgapkAGwNwRp1+FSMEz7RBKStKhvMTPKJqxNYBMkJOQiNAJkDebfCk4wvJGaTOpj4GOVACGHKZUVECI99UkjSecVHZISokKJETefgOlHF8OUoDOjNF5mw/fhTL3DO+DkkG1lSE+VrUALG4ELSCVQk/6QD0sda9w+EAtYAcrD0A+dEMZwuDJ90cpEX6VDU1EhMxuAbfvpQNrYSlWZJG11JCoUOitqJPcYcU0ptQbUlY1ShKYM623kfChDxUDCIjck3jTU9KZxIy3VEHYLSfWDQcAJ0Phb9d6GqRY/IRRJaeUmenO95pM43KO9aNLZh52tQB14cmAEmT5025w9SVXQR41Z3cUgZe+lRUARAlPLUC1MITnMpMnc/n4UFXTgRmgRqL7CetP4fASTOYAXsJGu1xerY3gybgJiYJPxtFPo4YgghUeAGlBVU4JBOhPK95HQRPhXaOHiJUoEz9mQY6An61al8NSke4D1mbneBpUB7BKmMvdPIX9aAY7g27kKI5fmRFNKcASQbj5+gqf/KRYpgza/wA9a4OEAEEEKnSY8LGgrbuAQVGFxvI51WjhTnKtFTNvnV+ewVvdIO36xQPGcNWdgb7/AOKAcy84e6qDA5CTFO4bHKTIJ30NPow6hHcv0rv/AIaVrEz15UHjWOkKChIib9OlBmeIQrvJi52tFHl4DLaKZXhVT3UiKALisJnOcHUb8qZQVosAetHFMc0/SvEMAnXw/Kg8wnG7BKwDFri/hNEDjEgGAY2plLUbDzA/YrorItaPD4UDAAN7+dKpCXE8xSoNxZSPaKtvXOK99Hia8pUAJ/8A7wG3LyNO4UyszyFKlQTMObHyqTgxr4V7SoH16/v7tR2hIE7gfMUqVBDxSRlNuf1oW60mR3RodhyFKlQMlAhuw1X9KjBIk2FKlQcrQMug95W3WnGG0kXA05DkaVKgexDCfZk5UzIvAnShzqADYAWOgpUqAnh9R1mevjUx8d0+H0pUqDsj+n++VRl/9tP9v0pUqCFg7rXN9KlrSJNuVKlQD8YkTpQZe/j+dKlQRHlGfSucD9r+00qVA3irgzTOGH1pUqCMd64ULClSoFN69xO1KlQNJFKlSoP/2Q==" alt="Historical photo" style="width:100%; height:250px; object-fit:cover;">
-                    <p class="grid-caption" style="padding: 1rem 1rem 0; font-weight:600;">Survivor testimony, 1933</p>
-                    <p style="padding: 0 1rem;">Source: Central State Archive</p>
-                </div>
-                <!-- Card 3: Mortality map (from Harvard) -->
-                <div class="grid-item" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;">
-                    <img src="https://www.gis.huri.harvard.edu/sites/g/files/omnuum4941/files/2024-12/direct_famine_losses_of_population_in_ukraine_1933_6_20130925_1040475971_0.png" alt="Mortality map" style="width:100%; height:250px; object-fit:cover;">
-                    <p class="grid-caption" style="padding: 1rem 1rem 0; font-weight:600;">Excess deaths by raion</p>
-                    <p style="padding: 0 1rem;">Source: Harvard MAPA Project</p>
-                </div>
-                <!-- Card 4: Museum image (base64) -->
-                <div class="grid-item" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFhUWFxkbGBgYGR4aHRogIB0dHRkfHh0eISkjHhomGx0bITEhJSorLi4uGh8zODMtNygtLisBCgoKDg0OGhAQGy0lICUtLS0vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKQBMwMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAEBQMGAAEHAgj/xABAEAACAQIEBAQDBQcEAgEFAQABAhEDIQAEEjEFIkFRBhNhcTKBkSNCobHwBxQzUsHR4RVicvGCsmMkNFOT0xb/xAAZAQADAQEBAAAAAAAAAAAAAAAAAQIDBAX/xAAmEQACAgICAgICAwEBAAAAAAAAAQIRAyESMUFRBBMygSJhcaEU/9oADAMBAAIRAxEAPwDn2YzDE+asnUqixgiASYtud8OuL8XZak6gBqVtCXUSo2EBerAxF5I6NipLXZZ0lrrB3G45gY3GDaJ0UgCIJhhKxO/UgT7g/ljjnBUjIYcOzTO7vFRkHM9zYCASIJJ3AgA72gTg+uwaGJACGYgX0xEatMkiDEiZHc4A4Dmm18lNG1EIF0loYRpIMwreYyGWBUTvaDDxGjWWvVSZIYs2mSCCZ+EE6BG4Msuxi+B4tJrQ2tDOjxNIlmABssAC99wCYm5uPmIErvJGtqgJhmYgi8yT1t394n2wAXDFTTifvAmACJm5O0AmZ/pjMvjIm6mwA29Qw7R88R9bS0ST5pVB3gkWggz0IMHb0g7YiNaRE9SQAevX3x5rUkYjoTBMbqZhrTcf3i2NusJeJJiPoSR8/zxdaQxplGDmLyfT9T7f5wUKhqQACBpKM5nf7oNpmIuJ2+WE2Xcgi94uOu+8WEZdysznrPWY7EQPp6HHNP+LsDeTyxKsJYlIb5QT1+I2Pf6YSPn3lCAC6sTrjedMSLgi0xtc2w7yGSMkspJim03kEEEMAY26+1r4V0sqKDfaqWX4QRYP91oMG0E2+XfGmGS2rGhtwlUVEZ2MI92Oo6XYKw1LPMjaSJBHxfVjxHiyAUwrpLoJYsKenYsHSCRY2mdQ2EyMGVXo5iPKotBQa2p2ZCs6SALA6WKzEusiDAArwXRX81q61NNQp/DMcqhVY785Y2BBkoZnVA1klJb6KCKmYVtbK/MrUyhRmJLRMhohfYwZXrtgvwllWrVVP7y65gqWBqyylyBpBVpBBM9iLEGQJ8/u9J7QNeluYKFIC6j96Yva1pBAgXwtzOqk5p6agMAhlIkiIQsWEEdIEWg36xCVaQFi8OJUOczq1BpZXo6kWOUgMhCmw0yRfqG2xb8vkVkKrEgb8pOoGABO4UKFME/M45n4Z4iaWeepePLIdWOmTyi5K3jeCBfsBOOt8KzS1NYRWVBtzSDMiR6ELO5s3ecd2Np6GTZehB0iTF4kmLRBJ6ek/XBdJO9saVb76R2EfQ2mNtoxMacCZkY6o6IYPUcfIYX8PraqVNupRZ94g/jOIeK5sirTpRCuCzkfyhlUj2JaD7jEXntTrpTOzggjswXUCPxn3HbGTypS/4aKGhkXONBse2GMCY3IPE49IcY4GI2YC5wMRM1YDfvB2tacVbjFX7SSSQ4mASCt4OoC8betsEcdz2kAzGuJggGBeCO0Hf+2KtnuLrdpsdyRFuszI27Wt9fP+RnV8SkG0q6ip5ZJe0g3lZJPw/Ed73kgkeuDM3xAmmxDa9SHlCg6T8KpeAJBtfoMVLMZtUcNdVMm8mNViLmZ9zhhnKTKF1QLKYiJElgAdpBtBne0b45nlkt+B0F5vOSCWZwV0Gm0gaWB6x6dDPwjtgSvUOh55ybdWkxBgwLx9ABINhiVcqwBqSkgcykknchRKiJERH4WJwFWo0wgdWUtYAE/7iD/yAiNQMA94xzKMpbbAbZPLIaLB6qISVXTyyZUTe50gM2wvqnpgniPDnqU9KqpSlylnhTFgZAvYgAx/xAMDFWrZ5NRaoR5qsGMINJCoASWB9IgiIvPQ2DhefrZgNScaQJenTVQp+ZAK3BIOojcjrB6sdNVQiKrkvLamyh261E1FWOmZ1mZQAuogi8+2IBXqU6j6ae5BVFHeyWB+K0gGd/USVw2iUzLPVUEpT1jTIAYGWEMol4F9oAnYHG8zmPPo1KqpSo+UJRQInfSJix1HeLFgJ7W4vwAtzOcWn9jXWmtQkgFzLDVMQGEk67gcwmbdlyZ41q7vTVUjTJCFVVrryDTJawPQA9ehIztdmpvylRTeKtZFu7GLBhO6qLjYCLHcGhm1QL05akxAklWjcgLe0TMQLnfOb49DskrcBq6jFevv0qW+WkRHtjMF5fjTqoBqERaNLGPSZxmITdeRWU56AHlkM0lrxbT2Oo9x16XxPmnRVgSxEwIAY9ZZhM8w2k7tEb485Oq51VAYFwJmTcdYuAYv/nC9q7JqcCL2Hb6RjXbdGQyyuadKYTSNLFidt2ABNolx3O0DaMazGdpEQEJc2YyFCi4OwMkiDY9TIMwIBmdSWR2IEsbaR7gSNyBfvGA6dMPNzN+3pA/PFb8jthekinykqVnbuZv7x/TERFojYC5n9f8AWCss6rT0Mtibn7wtIgE3m3b4gffwcvYAG4AM7z7frrhNtdiNAkATvvc3iSO+I8ywLhhYML+l/wBfoY0V3EXFgD033+WN0o5bxG/9d9rHCWmNBNIGVO09T+Xth/w6sDqt8Av0IXTftYzNu3Y3V5WnIBsAN/nf6W7dMazVYU6xIAiFMCRuBMes9Nr4wlFS0MbV69RAgtDaSh6WMW9I+fXHrjSl6YJVWKguImWAJ1gmOoEkAzOqRYExZGodLF9BQHqAZsenSw36CbjHrjGW1Jrp6hoVpHVg5UG0+nz2OwxnClNAOq1VfLpVcsTTYoFrFaz6mIJhiG3gwPgY37XKTiOR1VNJfWTs7Idau2nXzAGfhYASAdUxeMKKOb0oQwtEc3KqyARYgySJIuD+GLP4SUOh0imQgDmmxJ1ag0QIOptWnlJG8zM46uUvBcXYZw7hJbQgqKxYRTeQL2DqJMBwObtyiJjABo1aiVXeopp0awTU82mQpApyDqIv0uO04a8Nqsma1pU8uTAWNQUgHTtMgTBYbgCzXwg4lnnZqi1VqUhUeZVSKWoNd1kCRK2AsTOx2nHFAxZls1qrFmKKGgMSG0rAG+gExYC07++OteCs4VP7uyglgrK6nZRTnmG97XN9wTYTyLhdRQxcllWWkqBygnpIIWxPsMdD8N8eorWqtXoulQKvl+ZdiOVQLqApVeoAsXHSB0QajO7EdMCEDYHGlrLEacBZbMh6aOLB1Vh6SJjEebzyUxLXJ2A3P+PXHoa7Ag8R0F0eaCQyBh8MyrCHU9pgEHoyrEmxC4Ui16z1zMr8I0wF1KNR/wCRuo9A294WcY4s1YinyogGrlJYnpHY3nYTgHL5hqTq1OpcnSdS9x2tO3taemMHxcrLTdF5042wMWGE/D+OhiFYqCTylTIJ7dwcMzmMdCafRBhpnriOoFupIEi1xcbHewv+Me2N1s6qiSYAiTc6SbLIF4JwNT01WRzKMIUaZlRuYGwJMQd7gRbEzl4Qiv8AiLKsFYkW1zc3kzYjYN8p3uQb1GPMutwL3vHyBkDb6xY4vHE9VNXAiLkiwNwAeUkMfu36+mKrTUh/4bOmoAsnKTMHeeUEHftqnYY8rLivJo0FtbKj7hKswWYWxvM3v0Pfc2wZnMyCq6WJAUGPzg3kSdv0MGVUkSND3lTGlZGpRq7Qbb9MLarhXYyGZQFv0ClmNiYuTF9wi3645ssZJ0+iWGJxAhXOmxs0y3NFhJNjAMRex6TgnNHzWQVGYq6qdJMjaZHQRKiTJEgGwMZw+glZtVV9OoCIRZY3vpnbSeovMX6+86KdLzaVY84GkOCH1AbASRAmLSY6Y0hFxVgRcH8QGkgpoo0c7OIUaz11f/HsDsO8gxiz5dUH7vmMtU5jMgaW1mJIWmpATqJGwiZGKpwPh5bVpC03CKSzNpWxhjJiDq0npvEbYb0vECiQ3PA5GYbWMggE7sd52M9YGkMqilzA34i4hTzLu61JptGkQFaAAD8QBk/yAWsTBOK7xCqalRWVioVg2kosC0FgAfuKxA/49Nsev3xglRSqaW2UWgawxAi+kkE6fU/NYua1Ox0gcxHYQSN1O6kEWI23G+G5tu0BZ+EcNyj0uV62ks/loqF9AAJLFgAgsYJaTzbCcVKplalSnUuzhKgHIJSbhWDWMmWgR09Di7ZTXVqPTVqYNFDzaSphAAVhVVwJnoYH82Kz4tp+Sxp6NIqrTkgsQWUxysTdUB0wZiTMdKrzX7GxyMwwkUqSeWCQtqpsCf5RGMwgrcFzasyihYMwG3Qn1H5Y1guRJXHqmksalB3I3Pebi172j1wNmKzsnMJkzIWLn2G2PVamS8uYLTZgT+hiehkC0jXFMtAa5A2vYRpE36+lsVpbZmDZanK02dStM1gjuDf7paJO4W+0Cb9Bi9+F+E06i1KVR2pOiuBUdVq0VRQWgsjaVrAk9TdmtNsUevw/SVUEsSSZFk+G5k9Zi0f0x0fwRnKevUWJBXQoKimmp6ZVFYaVlmDuA66F21EsynGmmtGsaZV6mVcBmGsroqKJDSmgAsCEkLEGBMGNRgYiyfCmJuD8PwgkEmAep9TbpOLV4x4g1HN1C0J5jlwQQWMgKwYKSqiREMdQ07mxKanxBWBYESQw2mBb2ki/yjrty5ZOOkS6EucoBKhhvXS4Mr6E9fe42x70cpJMhPu9gTJI783T13xvNVXZwrSzCRJkiAYIBPuD88aakE0sQStQCIuOm3f5el8G9Ek3DHYqSH+8VCdp5iTMALAN+/zwRX1VCJuHAKkxNrQD1G1o3vgzw9wnzadMeUSz1BDhQ8D7ymmdxF5gfMTjxVootUhR8L6VGkkmYsYLRuRA6g7XGCca2iuOgvhjTqRgFKgaWE2ExI6iCAb298LPEdChTUPRzWvzCutCAzqVB0mx5Vi12JM3m8N3mkoVQPMmw1QCbgrIJ6wfkPfCPjuZVlauitTerCsrqwIKlTqBBgNZR1HsYlfHdt6AipZlmy7qaiDW6jSW0uSwGrf7hAEtP3e0hsfN00EU2MnlmVgjaDewj2PywBnwgpqyVQzqaVijK3wsWPUSpAXczYiBYWj99yaVTURJ8wTBGqCLHmvaL2tcjm2x0ON0ho85biKh2YZZC1mE6mFOBpjVrLqun7moiJEHbE+azXnqVfMLTZRTAAQrYuFkcsTcEEnoTPaw5LxIjAICqiLQZI/sPT8rSs4hmaTOX+y84KdLQIcfdDWhhJ6gkX6bv6n7sqiq8I4JmKtJK1IEK1Ty1OoLLxqi9toEdyN8WXN+HKtKlQ8xhT1LpLuNApsZIViL2aQfiHNIBBsP4I8TnJUWUq7Td1gQpuo1FlMSdJv2AncY6hXNLiFOkaD0nkqzI6nSCjDWO4N4iLyLjFVF2vIqQH4QNTyCrsraWhSmnSV0qwI0gfzGZvM4K4/liUVoWJgki8wSPlvb1wenG8lk3GVUMX1NZUmDGozAAEAj5X2BIl8TZgVMuhC2ZgwBtujG/bG8Zfx4hRRnWahbb7P6c30iPl6xfGqvNpNwQ6za2xFvW+2+1tpJqJDkTsva/wAVvn6+oONZgRAFgHXpYev16enriSg/w5lzUrWkcrW7gRY/r8sXBeDgjrOKz4VcJmJ/2tb3C4u3+oJ3OLTdaFoW5zgepBB5hsOjW2M/n0k4RLlDRTy2NmcFl1jUSZEsGuUt8ImTeeuLlTrq3w3wq45mbKGamqaoJJEq8Ervt0Nr4iXtjKRnDpTXDD7RQJIIBvM6fhFzAaCQROF/D2apVULqHmBlBEGwHwrtbe140iBfDjPcToAjdmZRJB0/7fZmJIYdLbgCcIs9UqEWYLGki+kEA8wZQReDBG5k7gknlnSfYEec4mXqUzTBDw6EJAiYUjUBJLGBN55dxbCHPKgzDdBUAVQxDKGUAnS1pt3noMN6/lUnpVFYFSjMV0hSr6NRECIUqBe03M3EhVaWnLJX1EPRcsh0QANlJaJUFbX3IG2IkrsKI6ucfSbjWAg1CxAX4bg8u0x6ze+BWR6rBnYux5mmSdNlBJBm5YRa5Fp2xYODK9ZfMS1KLuZNjaWb+Y7W0wZtc4Bz9E06tUvUraVPljUdXw3IDECweSdon2nnprchUBLTNOJjSDBKgGbzIJjp3+mBcyw069tPw+xBIYahFxF/9ww0zFRF5GqkhtLOyFixLLpIJm8KW3P3j3IwHnwjtoUkofiMmEUSRqtPSdO34YUYWwF1StpJLnmQ8xedQ9IPbvbbtg5MmAENSoE8wEtF9K6Q4YkBmkybRuCfu4EfJBiqiIMElSAJ9ewknfa204n4fmteYp0ahACK4Pm/CFUAFdRvESQRPpuMbQSuqEh5SrUGphHrHzhvKwRcaZGlRqAmDqJO5BvKjxfxBKvkKF/hghiJFjBHxKGDQJj4RaLzNsywytV2Wk2kgIqELLNE6iSwk2Ec2kC20Xq3jbMmuuoqnK6jVMmykfDYhNNh1tvGnGz6Gxs3i3NUfstSVAlg7UyGYfdLCfiiJ9cZim8QreZUd2BJJO6k22USBEBYHsMZiPsl7DRDX4bV5B8S3mSGIvIILXUmYte2JK1cIdB1Kwny9JlAZ5iRBDKRMx87Tg/LcUJBLBSswHsTa86SJPsR72OBGyCSSWdmEkBd2E7R1EWgERb2xmpt/mjJ7B6lRE8piQ9iGp6TYlWAF9yC0gjtuDct+H50UPNWpqCMwnTU0yFDaQevxMBqCb7ECZR1q6sYUvJshYASD8N5JsegG1hFsMwENEaqrGorBQGbTKATJAbfWwA1CJFjvjaOkOLZni3iJzVTzHKl10/BBUiLkWEAkaoMEFyDtZLks2aZ2JQ7rP6/X1wb5QaV1GGHew3sBG306421IKkabgfEdtjBjvJxLmuhMVZjMF6hqC3oT2An8dvYdRhjXKFVloITUY7nYeki+q/TvaKhw6mTuxYm4A6emDDw1UBcNICieoHUGQIg3/7wOcfADTh2so1IsqAo7SQqy0AWYwRspt6kScZl84zt5zE6idQ3ERpW/U6QosZ6XnAOUpioyrOgNpDkiQBYE97i/fffDHI0x5m0BSDZSNWkmSo6Ex8Nuo985ytFWSqkVGJ5oPmK1x16DfqB6FThV4iokIWMOKhYgtYr1CgsZBG8jfqfuljUI8wHmAY6j7Ex8ze9regBwn46gaFYFGgG5JGoAg8onfkAb0JwYk1OwYk4a4aois6KHMEuxVVmQGZhMAWPXYWOx1xOuabMgI6i4k6ehv37egwLTpSSoIJAJHYgb74GzZOqW7X647o1Y40M8tmAV1PW0naAp27cogYOy3EaOnRU8wEiQQF2OxlmUgj0BwnyApEw9vxBxZOEZgVKaI9NdVLlpv5nM3MSo076RMb/AMuLos91q7lVTQzuKmmyiOYxHdgWn02A3wz8PZd2rrTVv3esC1OGZ7kyI5QSZ+Ej85xBX4bqCVqdVdYeUpsrD4mYhlb4SRZiDB+lzOG1DTZmqr5gdw+pl1SRIG8uAoi0ztytYY5pJNkVsccOylWjUanXAYszqGL1AW0gksCpEEgAw0fECfhAF7bNUq2TV6NSpUpmoYNW7CzypJAJg2vO2+KtkS9VjRd1DOabipmCNRKxpp6XWSAGBGkAmb2MYstLgpy2WNMsHLVNRABVQxUhgtzCWEDp3O+N4L0UKwTq3A+z3P8Ay6+v6jpiJhYDs6/n+v79AQ96hI6oem/MLn9W+UYjrXA/5pb5gX7j/PyoYb4fMVB7NH6/X0jFk8zFa4SZqiOxHvy/r9buw+NoLRLJqmfWnd20jSTMWt67TfacIM/xJ65101ZtJIBBs89CGMIpsB1Ow3ILyQwKm4IjC3P5Cn92YiwAUqlgAY3Uk6bge2JyxbBMr37nTp/bVC1Rbwu0kFYC2ssfeAgie1mWUyVGm5qaUqM2qALJFyVLAEEqYBPYi82b2aVxV00pE6Wb7l4CmUkEGZtcEdSThnSM6gETYB2AMMZI06v7Xv8AXBYkVZzXiNMCl5T01Jp1TTRY1E6Tq6iGJ1LfY6zvbBvCskdOteXzYKjW2gAQA1zpIEg3BJmAABGC04av7/WFUCBT1IrEqBqZVMKoI126Cdugk4MwlOcuqKSlaVLBhyMxI1WDHS5YbEkRbrjGK8sLF/CsxVo1auT1Kpp1ywGkKhV18ymdo3J+KR8PbC0MPKY1CS7VHIJIJA1sIOkix3nrbbbBHE8+ozqMyylWmKZYsebSCSbgkHSxUC9gOsDC/Lqrawt+d1WLwJn0O1o373jHP8hvx0JsjywOrY6lkzGqANjG29riMRJTGi0zseaA1zvPUQG69bCcGVFVCVPxd1I0wRMEibxY/PGZReUkLMXuehgEz/L6/wB4xhGTXRIRT4YRSVnIVnGoACYGqCSZ3JDGNo2w4o8KTMURQaXqMQdQKhUbSIVXMGOQTvYA3kHANHhpqtLENpALDspux1KSpAkWPU2OHn/+YXWjUGliTBeC2wgDQG0qdRaTEKRNzjrhGV3xKRX8uamSzByudaqHGipTanUBR1EiwNmJ+EBo+umbL4i4OlXhtSt5WmsabOzFTTB8tQ0AnSCCAQCq3AB7yX488LZnOUUFNwr5cl1Ww80wBZt1YAADoYuRIIr/AAvjlTPURltfl1P4dVCCCCAUJjVqcdCTAWYOwJ6eNaA5/QrPpHKPmb4zHupl3UkGJG9x/Ug/hjeOPj/ghu2VonI11XzW0VFekzLysvKrFT90yTN9tM3jEebyWZp01ZqbFForUDkFZRlDSuqGOgcp5YBm2xIZNWK1HXpFJCGUlm1jWqmFYkIdQBJEWEc22H+X4tmfINMVEWmtBqJpFKUsuggBWgM0vJMmQTYHG74v8idMo1GS+okqwuI5T2NoAkjoMOqS6VZ6kA1NS3I1agvMGM8sWadjO8414Y4brzNOg9KtUDg6lpFQYEHczKgwZF4EjYYJ47kVRrIy031GnrcMyqOUiGLfeEWk8pvuAmtWTWrBs2zqAy6RTkFI1MDtETcqSDv3O0jCtapMyV0xt036dNh1wdUymmkE1mTqI2GxA26n4j2gdZsGKB8smCdPoepF7e+J0InSsVZSSSAtiBBAi28T2n+2HZzaqARpdCuojVBP+1oJ9bQDJII7Vmlm2ZhMyLyTve3yvhhlkZtRAIBkgbmJNgRfGc4eQJK1B0qqFlZNnkiZkQHFtQ6An7vXDTgeXOtqcaXprqKtOoKssOkzBn2abDHnLZ+kihaihhpA0kBr73UxEsvYESvvjWZzTPna9Rh/EUGBY6fKAU9L8oNu1r2wflBp+C0a4rnEpnRLeZEPEaSZBAN+4B7QBGEXEsyXCsUAiwI6gWAJmDAAvAN/bHjNIWYm9yR+j88e6tZWpKh3Ukkk7yBt1tsf+sXCKSFehQtm2uZM7Yn41w8rSpVdSMHkQrAlewYbqYG3bGs1RCtpJA9tu30J/PENU/ZMCRuARv7ex/z3x0x7HHsGzeXKBDPxqG2j/sevv2ww4VVKqaugEIwMlmuZAFgYgEg97YYcXQZg02+BglGmZXSulaKLAHfWGsYm2DeFcHap5uXUysDmPSRIP6jbGhoNMjmJpimqFlRyVaneAVFtTWG4WWAgWgXw98J/u9TLGpWFM1FBCajoITToA0NAdGqPBGsQxFxviuNw3NKyIyMzGBU51YPHLqsNtM/GJI3Bi9y8G+DalYkV0qU1B5HUheQi2m457XIBjYi5GOZxanpC8gPAfERNc5sLWqsxVNEAhgVJUOplieQ6dMkaAJMxjpHEOI06+X1orAeYVINmkBgRv+oxSeMcGNCqxpLXUICKr0yGBO6TqQ6XKXlAN1sZEyeGQWpu+pQx0CqnNr1BHhiS5MNOoNAN2BgjGsG06HQxIh466DHTZh6WxFWEAbHnS/eWFvb+59z6F3BKgko2/XmW/wCH4YjYTc7l03/5jv0/W8k6AH8IEVR/5fipOHlRcIuD3qL/AOQn2Vvy/XWLClLr0GNoPRLREgwpz/DZ5wA1bWkhS4UquwKiwNh1mRIOwxZaWVkTuMYaRGFJqQ0iuUOHViyEqqkFtZgbySdLRIB69563h2tBUTkALCYBMTf0t7dsSsx2wDn2U6QV5gQVkSPexBHX6dRiapAVPijJ+/0ixnzA1J1BJMWCDUQN3Mxc/USv8RUUR2ZGfWF1MFkJ5ZIVoMWIN7fynqLEeJqDHLwGc1EAaBpY6pOmZeQYYiIFyu+2J+AZX9+y8MoYMoUvqZYEkNy7MxaTvcR0tjl4ttx/YFU4uilFcKdFIloHUaikjUJJ5gehEixmABkcwxaoV5SzMDHYkTJtzGw6e98G8P4K1ZqwqrNCgWR/LguQrMGNMqLgHU2k80QL2GJv2d8PBo6gQUKsJg8zFoPQGAfn8r4ylickJkdHg1Wpanz6fi0FRywSJgyYaREHcYIyuWbUEKtPMQCCSSBsJ+hi8wNxa+cA4c1MWQrqMspiBAhZ2/D8LjDBOGQ7MDdzJMLvbrE9NthbGi+JaTsVlOyuYek9FRS8gtzFiJE+oHNGxBN79ziy0MurFa6qGYtIYv8ACDJMBQoDRa8GSSTc4OzPDlcgmZkXm8z19LmemJaWU0iBA/XpjrhjrtiYNmM1TonzavxE2MwBcAX2BuPeTim/tA4U9Fk4tk+SrSP2ykE6wxjUdVzEwduWCI0DF5qZNWKllBKkEGOtwPfc2PfGDhdM02psi+WwIZIABBEH8P0N8aSimgVnzjWzJqM1RlBLszGJAkkkx6dMZiLifCjRrVKRqA+W7LIJvBIB+YvjMcDS9l0dV8R1RWyyZhl0VVpOKYAgPFYKzuVhSWJDQs6TczIIr6cPJVFQo1WsohTyCCoamdZUIJOkhZ9/itcvE+Q0cKreazGpSFNC+qoikq6iyCEIEwCAekmQcC8J8O5laSZhlWaS0jSaVDwoUp5bEO0EM40uQCbaQrWc8SctrwT2c74LxTyK61BqSsC1NYsTqBWPhYdbje8g2wX4mz1VqwdwSxUSsuAi2C2mOk9t7dMJuI1QtdFJk6gSQxBVgwJ+ESCDIIFwdjiHNUibryrJaNt/brjOuifAfU1gkgauVgoglVMgyJ7ahMx8S9DcWnTVxGsgi8kQA0ifQD+3yxLW1GmCZI2lp6CB87AdYwRlb3UwSI33Ow/OL7k98Q5aJAqAAYapheUkqbQbiB1udx/TFgyeVurExJAFrWkkyfS/T5YTIVBaW0GZHxGe02OoT0g4ZeHanlsQxMrblJnSw2BIHcj5ntiMqtWNFgq8LiopCBtekFSGBEKFPKYNgQx0mYmJvFZ8QN5GdrUlJCqECQLgMgaOlpc9fa0DHUPDXEaMrUdm1BgFBBfSukoLBeU6WiZI+K5AxQPHB1cZrAgDQ1EExMwiEkgXJg3643xRj9bldlqivZkAqukkEb92PU+g9IwvNGTBYltzCyBiwU+GPqVlKkAiFYBQZNgb2Bm/t6YBr5svmaZGkFqZViTEkBiDJJggFRIt6YjG76IoXZjLkVnAXZVnrEwJPb29R3xbKfES+XWjpCqmwEge+kEBmPc4r2Tos9as+okKy6tRmQsb9f10xP5xRIvLAgEdLfofPHTBmiPfFKNdyCo8wyNPf0X1AjY/4w7TLmmQ6kglRqC9N5UtcWFu9pwjrcdFMhRBJmdSiwPQGJvbckct16mw0c2mYVKo+KmDrUWDW+KNtQ6+na86FAGZdkzCEH+lxYn5/l8yer/s4zrNRqqSeWoLHpIv/wCuOPZ6v5tRQew0/wDIRY7WILSfTrjpP7N2KisJJBFIgnfZon1i3yw49g9F04yapCeWCTrAaGg6TY+lgdUnaIgzGBeKURTo6ASZqTMLPwt2AmBYTJ7nDCi5MYpPCjU01xUZyFq0wCxLEfZubSzfzT9PYXJUKzM5nKdNg1Rgq6GEloEynX7o94698QnidF2CpURmLU7KZPxLuF29z3A9MB+Jn00TIPwkWBIvUpnp0wm8L1AavLBstxt/Epk3xk2UX/g/8dI6T/6N+Pr/AGtYGcj2xV8snNp7rW39aNTeZv8AqMG+DsuaeXNheoxtHYdlH6+g0i/BI+XM4358jEDKT2GI3BHXF0KwiowIggEHpgeuyKBcg2CnfT7arA/n64i83ETOSe0CB1BneR3BAwcWLkJ+KGrLchYKUu4GkwZBNwXMRZQbi204j8B55cvlMz5p5ctmK6l4NwG1WHxES2/qe2HdOmggSxCnYGwm9x1n5/SMc84zx9cqnFstLGrWqjylgzFZDN7iyCd7kj1jNx4u2NOx74GzCvktBdyzl2bRTbmLNAIIHYFbHpM9AH+zk6ctUpAgGlmKlIoW0MeYRsJUjUQLkWxrgWVbKV1yjtrWEChp08yrf5OI+u2NeDMqVfiK6NVQZ54mBpBmGvPTVFjiIpmmSHH9l84blwVlVUGTs2oEbAz6gfh6YKdGGIKL6QALWAtj2K598dCTRjaNB8b83GLUHUY3pkTH0wxk1PMdxbHvK1dcgrpAMdZnrv0mR8jgSYOJKJgADYYlqxpgud8B8OrOalTLIzGJMbwABPrAF8Zh3TcRvjMRSHZRP2nZ+mclUy5qKtSr5YUMYP8AEUzG8QDfvA9lK/tJoLQWi6OAKegurQbKFnYgTvF9+uKXx3i61apYrCXHMdTEkAGWJubCJ2AAFr41walQZtDIreaQBIIFwAdtJ21bEH1m+MJZeUvRmvRX2pK2ZqEMGdq1SNRuZYwWjaZ6xhpl8wJGrR1szcp6gAm4EAXO8bjFbzD+VmXNFrLUYIwtIkgGOki/p6YZU69QS6Tqaxi/WSY67b+k4yywthNDvKoHUINJ5YAkFrkkAkXBnuJG3aBaGSKwsSxY6V3JABLD3AEG3f0xLwnMjUI1qzWLHrefiG8mewEfR/wf/wC/yxZUqKlRjUBBMQtTTcmCsuTbY3jbHPD8+LEiu5ugCw5YVubf8BM+3zB7YykQNoBvEiD/AORBge3rgjxPmVXPVDTSKcWpmwURJAU3S4J5gGvJAnGvDeTWvmRRZW7MogtsdUdCRvHpbFyxtaHR0L9nuXp1gUZR8I6AhoM79YbSQfT3xQ61UtxfMFmFsxWBLAleXUlxvEDb2x1/wt4bo5FiVYsx67TvBIMwYjYxa0AxjledpJT45VBEhs0SRt/EIYX2Hxj6Y6FhccXFr2VF2R5qqq09OkSQtpuCQINt+aSB/wB4rPFA/mURHwsVA23i3vcj/rFx4tk/3eo1ImanJBAhlDAgmRN5OmYmwb0xUeKwKaEhhDzJBlYkEQesiY7qcc+HHwdE+Qbh1fTrmdTu46RcXn5x/jDbi1PSqK1oGqB1nptt3O31wBwQQi3CsA5XVHMSGJN+wQepJtgritdKijTUeoROkkXJ67nmBAk3mZgGcdkV2aIr+ZDVakC97/PE2VzD5cgqSO/yi4+eC+E5SoBK+WZKmZI6mPu9QT9PTE/FeE1fLDOqxeCrEz8io3OL/oYahFWK1KNQILqJse4AvpP4HHQ/AjzmfL1QKtIxMfEhmLddLP8ATcm8NlZTNTpBBC3bTqFyRsYMW74O8QZSlXp1Czmq0JpVAQoIYlbyZA2I3wK0wOt1KGi+qYvbHHvD/iqo7OhCzUKuCSTdVCndrWvse20DHW3zYO845NkPDaU6tU6mOljCEGwIEiQBMao9Y+Z1kmlsiLT6N8c4t5ko7KsJ92+qWUwDqsOUE95OFvCs0lMl1dVYKp0lbNBVoNwBcbnv9CvEfCgE8xRp0oZuT1Tr2ucKeA8PNWpFjCg2YH7y7x6E4xdeyy5Z/xDUp0/MhCQGEC/xI635j3M9YjDb9mXFmq0aoIACVABAgXHvvb8sK81wJKg8uGUEMZWZEU6hmNgSQOWLRsMMf2f5AUMudOo62DEnckqJ6ADpsMawVsiTpF1DziGrJwMKjdFxsV3/lONuBnzN+WT6Y0VjGi7dVP440J/lP44YrJaRGOb+IOHr/rmUZrLV8gm25VysfRVHzx0amxHTFD8bEvxbIoIDKgYHcDmdgflomMZ5Oi4dl54xkqZ01GAJUDcx8JJ9jAZzfqBit+FqxHFeKA2BOXa4gzouR6GZt3GLakugZSCCJEXkb/iLfPFJ4QNPGqigg68mJ6TpZQvz0KD/wCWJaSaL5Nx/wALuzjCbjPiahljpe7H7oKz6EyRAPzPphtnKi06b1GiEUsekwJ3MAE7Y4vmszUqBytQNrVtRIIgA+Y24EGY23JtveMuTjpGaLbmf2kfyUlvqgFr20wdgCJPwgzaTA3EoftFzIsUpMOhIiLTuCseguTHrGKxlcotX7Mp5boG1FmJAIDNLiDyiyxM/OcCUaOqrV8sBFSGVWcyoZmtB32+kTe2OaU5dtlHXuDePcpUQeaRRNpmSpNxYj+vfc4k4h4lSPsQZ/mN7dwBMz6/THHMwW1DUbNIMjaNtvuxcRGG/Bc29WmyBtLIBBAmx2+IwOu87YwzZ8vH+LFY44n4zrU6rJ5jCI6kbgHYRG+MxQM+Gao5DSNRE3vFpsOsYzFRxulbNEiy8ZbLDKU1Clq6xoYBdOkGTJJ1XYkgARGmZIMo/wB6pqhQliQBY7CObc7wVAEjYmNhhlxbKhApUsSXgDTtIJEdeg/U4l4fwyg1c/vDMVQ0iVVLONUtJ1AjlBHLe++CE1ImrKXxCorV3ZRClyQN4BMxiw8K4jSo6WqURVGkrpJsJHM15GoTIBtyrI3wr8S0UXN1QhldQIOnTuqk2G0Ex/fDapwosimYUJIkbyLQR12+KPmMbTdbGzzw/iFIbrpYKRZoAaIBgg9b7joPXDfIcRZawKg6jaXGqTpBKmfu6iYnuPcJW4YL8guQNGogHfqDvIBi95PpiekDqEqSAQVMmSLenxencYwlXaIDCgqVDXBKvpIZIm55WvIIkFiTfmPY285TPomfatRJpqGUqCoBEgBhCkgGCxkW9pthBVqh/mDFSZsQrOZAEgW+jLab4XZPNaWaoBqkAkHrI7tNpvfsMOLk0xpndOB+K6NRSa1RUIIVYBuRZjaevy2xy/xVxCj/AK559Jw9PXln1CY5QgP/AK4Q5WtrYKzEL3LTB2kaSCRESOuI+JUETNAI2oFEJMEcxnUIkwBEWtjWM5tVJjjed49kuHZ2qrf6hl1eCpXWhDEi3KzA9TjnXjPI+TRWhyt5bLLp8LEKQTPWZkH1OK/V4fS0KQ7F+0WmbLMdgRO0x0w74jwx6mXpeXTMinTgE3PILAQJM/lESQMVyXbJFfh/w6c79mGCk6VRiCVB3v6fUiZ6RgPxH4VzmUH/ANQqAFtKgVUcnrIVWLBbi5A+IYu/gfJGjVotUpssVPiJgD3t29evpgD9qNYVM0KhWGqLREb/AAgyJtIkm/pi4yTLTKvlc0VVhNgUAsDETH9sNcxxfVT5gF09fY2/v8sIaSalffdZwRnQdDQPX+v54fkoHyHDsxXzAoURqqMWVVJCg2ZtMsQLgGx646t+zXwLmqD+bnNSrT/h0TUDc22ohSRAGwneD0vz7IMaWbFUTKtTrKeoNNlJHzWRjt+Y8SCrK0nUMtzdtugMgX9JxcVbJbpDw0h2AxTKlMefmrj4p6251Hfa2HeY4q5ZSGUBQpYSep64rWV4kKmazGkghwpBDAj+MxtBvaMXOLSFFoW+KMwtOmisPj1rPa6MDtedP62xXuAZsUa6CA3mEJYzAlTIgGbgWw48e5qf3akASdTMVAJNoUQAJM81o/GwrC5oJVpP/wDicMQeokBvnAP+MY0WdbFKGJno5n0NN79LYK8K0ooRY6WibnZV98Q5/MhEZ9wqvMdZVr/OR+oJW+FvESaNDSraixntCwd9pt9MVF0JltamewxGG9rf4P8AXC//AFpS8SI73tv/AGX64XZrjBANoGokkDpAA9xfbFudE0WWlzdbegxtqL9IPywgp8fMm073+e0fXEr+JAD924EXsd+uFy1diHQpnqPwGOf8QQvx5bfw6BPt9mx/N/xw+zHi0L0Ex12Hr9CMUermS2cq5k1r1EK6QI2CraDcQBb1xzZPkwi6bGqOmPxMUaQC8wpoJt0CzaBew6Wse0Y5rW4+Wz1HPrlKoRKRDANTGpSGK/f6Bh9MEVsxqkBhJEdev+b4BpqEVFILqoAKrogwAI5mG+18Zv5Sl1Q00WXjP7QDoK/ulWlTcFGctTLKXIUFQrGeto6/XnWbr6DpW15mAYkc3SCQQR2F/XDbM1Xqcoo1SSVjV5cDSykkkVD27YKbg3P5i2iZiJJPS9jN9/5o6YieXaboUv6Eddi66zPMxYmJbVszG3KCdPU7z1MecmoeoVYFQyCNOmDpYyNPUyxtNvph5W4aUA0ISSb36wfa57D8YwIOBSyzJ06ixkahOkgmOsiO9oxl9i3skhpo4pPppho0tvIWRcAgE69SkwbQ31XU8yKPnkWGmEIM3LASLTA1T8vTFlSm5BUIvqBM7+gj8/64WcZ4K+iEUSYOkG9htDQYixJvfBGSf5VsCuUKLsoK02Iixj5YzFx4Vw+qlJFJIIBkA+p9MZjZzXtF8gbNuFalIC8wsP6/qcSUKBNSoIOoaJA/4z64wVSVjmidp69474gpQGZgrEuRqvvAgdLWxy7UaRVFcz+QL5pxMc8bXsAOmLeaZC6YNgALfLCLJXzJJ61P6xh3U4o4tDem2OnJkcUh9AdTISdhFr7fTp2xFWqMojQG0yBN+m1h2BN++J3zktq0HUAQDPfe0x2xFSeWuCCWJn3sfbGDaZm0FUFOmGABJkwYkHt0+vfEI0rVdCEYnf8AA7R33sMMBVU9I6e57/X+uPL6ZJAkjsJNp6x7fTCTj7KpE3lUzpTlG8LNgbzCwPXrfCziXD185CYMruDOxn8z+eBWLamaQGJEbkxFriRN4wTmlq/ZmGciZYKQADFibD6YuC4y2xJbGeazjoFGpiAulIMhB0G9l6dfwwBnuIVVAWqWKtG0GR96TPS23ywypcNSRUrEk7gR9Pf9fPdTjeXputHR20yGY9rDT2xosT7YcLF/+sFSNR9ZBNxaJBO/oT3PTCLjtUPWpQZXpNz8rCBbb398XwcPy1UFTSK3BlRpve8RG3b1GKHxanGYibLU0iB0Aj8ca4YVKw40B8IUHzF7qCI9J/pgl8v9m19gb/0wJwxStZRI5kbf6j54Y58CGGxgj9fhjoY0R5tJzCCPiVlYDqCrA39hPyxFU486mIc2Un7SJ5R00/LfEXEM237wrbEMLi/fpOLt4J4dlK2WLVssrujupcifVZ9gQLdsNaGVJ+J1GKc7qHUkjWdwR1t6490OMChDffOzBtJW8mDBt0+Zx1nK5WhSULTpooEwBTU+sbm3zxOXWLhTfby1H4xf5enydio49n+PtmGVm1l0+BtRJFyRERF4O3TfA1fipYl6igva51bxuZYybzfHZ6gon7intNNfXr7jpjx+60t/LSR/8a327x+owAcnznjWtUQ02d4iADUsLRtpuPn+WF1LipVoDuWJtzkBPQLJUgjuLE47kKqr9wD/AMB8r7D64ireQ4IelTcRJDIDF7+224/G8MDijeIX/wDk/wD2L/8AzxY/A/EXzWY/dy1QakYhi4sVExZRYi3pjoP+j8MMD91pIb3ZBYxO4/L0OGeS8N5Wmy1KFGmraSA6AAwbWBk399sDAXVfDZVp8ysRG/xMT7BLiPXA9ShRU6HqPpi8gqxM9V8sW9ZHth5WrhWCk1CSI06h+ADBo9rXwPncygRpltIupLGLd21Af5xjNPxQyv5zh2VLEyhBE638wMG3FlgETB3v64pyZR1LNsAGYC+9thB3Htt02w9zxeZ0yZuAAoHyAjCU8QqecKflVIiYGn8/x32xzJOXY+J5z/2bEBwVLFbKZPKDJLAaZkgTPw49Jn6YmYIkLpiJO/uT6kWuZGGBTzAQ1MgXEN2I9OmFGY4GWJCKHgC0XF4jb8vf0xDhFszlD0HHiSAwsm8AXAHQ3nYi8zb5YiD3fSNLR8QqFZ7Rq9on323CkUTRMMxRhMK15A6XNh9OmC6OcqrN0I1r1QxKkgAhoA6H1tMzifrrohaez1+9uF0lwWiGsT0tBA2A2PWMeF4ywKqhJY/CWAt2WFv8/Xr1Gam2sBrA3BGxibwAYsDufvX2x6oU31RSJJ6QpsASJnrMHf8AIYpwXlCpjZOJkiPOap/NEAz2Cnpf6/LCzM8V+0AZ3HN8KgDSOsnYk/PtMXwNQaRUWCQSAWUAwQbGT0n1vqPbG6rgA2gg7mZt3v8A1674ShFPoKC3EkkNUAPqT+MY1jFaBFz1kTF79D+GMwuLHTPX773H1H167zjz/qwTddXaJPfsNsdIHD1F4UY9DJA7R8sbfUjejlFLNh31QyE6r6YmSbmx7gfow7yebqEaWVniIlSTI3BO1+4JxdDwoTvgmnw8dz+vlglhjLTFx/spPmVelBz6QR8hbETUa2rV5LAQfraDcemOgfuQ74w5ZRucQvjQQ+JRRRryYom++3f5foYJpZTMSfs49dS/TecW4KkdT+GPIB6UW+bAYP8AzQFwKZQ8NvJLIJMbsD/Tf8sZm0qBSsqLRf8AyfT8MX1MtO6x85/HEdbhdFp1IpO/MJn64HgTdhxOa8P8SabVkZv9ykX+RtPscMR4myxMslVmX4ZCgj2Oq3TF2PCcqIDU6IiIBC2+R2/xjFyeWUEgUFGw0qsj88dGyin0/EhmaVKJ6sNZ+QiAfUzin57MmrmCxBhqjkE3kkk47PSaiqyrAzMEIk/OInHHK1U+aCpv51W5AidT9vyxcCWAVIWrT3gEjDvif8LV6gfiMKeIgB1XSJDXPffDLPVvslmQZkH+mLYkIuJyKq3i4j8cdE/ZoNQqICbspsCTJ1f2nrcDFD4uk1ViY5B7STi8/s7dUqZhChYk04K/FfUIEgiSe4wDL1Qy4A80sQdwsgE25rusb+huT7481suvMrOymZIY6ZHSSFImOx+u2PNBwWqTSA2gKgkEHY8uj3LADv1xBmnedDKxCmQVIIEkxyiV0xMARsb4YErVAkhXF9iaixYRvIAPsJxpKqEapcEb6ZgTIY6riMFaYUE6m1zMi7DYSZJHTphfVyLASugw0wwiQB12WBf1ucOhBKVkAB1VSWJACtcG0neB9etxfG69SkCYeoSGOq+kiAOjkc0dfS0xiAZMMQX2N20AWAFrkm0T0tBx5SpTggqgTVIIguSIsSo0jcwdMdMGwPdfN0iJNepcx1k7XJ6jqBO++2JchngrzqY6jca9/kVgH1b5EYNooKanaohXmAJBJNwbtDC+9vqMCroLIj0xTZkEvt0tzaiD0IPLtG2GB54zmRoLUCKjuYMEEACC2ode0X3JtAmteIKucq0SjUBpOn7jWCsDCmW7YtDg/Fo5QpVmDAEv6nmkdZUdj7C5bKlmVqYE31qdRBP81zc+3rYi+MZ45N2mwOdLxrO0CQaXmoBYODqA9GHT3nGl8VqbtlKgM7iCJ94E46K1OnI1Qj72JgH2/wCvbHh8kpNmBJ6ltRP1JPywuHsdsoDeI6j8tOgEFpZyWN+ygAfiRiWnUqmykhZVgG3kXB77k29u2LtV4Weo+X6E48rwsdvwxnkxSl06B7KdWy1UoVLggzBKAkXFp3+h/PCdOB19RPmUzJ6oAJ7gAwPpjpzcHPbHkcKPYH9e+HCEkqbsVHMj4drajFRZO5g9jt1G577/AFZ8KpVaBgCm/ckMJA2up6W9+uL6nC/T8Me/9Gp7sQPe2KcJMCpUvMglKOWVSZID1VJIM32Efj6485nL1mEmnTkxB8wmLiRfoQO/X0xdKfAlPwlT7EEY8Zjw8e2E8cmBzg+Hs7/JQI6EvBjp07YzHRP9Ji1/of6DGYdP0AWuTQCQomPfp649Ks4zGYZZBUaL9p/DEVTMlVsB874zGYkAY5tyY1HabYgo5hpifwGMxmGBsZtgbQPkPzxIKrE3Y2E41jMIR6pVzMdyBjzxVdJUAkT167emNYzFIQlqNG0Duep+e+CtB0rztDACJAF+0D0xmMwgCqFBQbD/ABJxzmu2nMQNhVq/+zDGYzFoAXPfxgP94/phlxAQix3xmMwwFubaXB6nSfxOLr4CqlXqkX/hzNwfjiR6XxvGYfoC1Nn9TEFEGoHVBYTAkTDd8F5Clqp1nBKFUFkMAyLzjMZihAOWzrq8SCLC4B2sPa3bDdacM4/lDR+Nj3GN4zDQENLMGFEKQTMR8unocS5IkgMTqKgxIBid+l/njMZhgB1X+2UXgmI1MB22BjbDLNZhg5oqdIQmGFmtqjm36AY1jMC6AjzKBgzXUshezN8SAEG5M37zv0wL4crky8AMWCmOoIJNtgZHTucZjMJgEZbLrVdg4mfU9/U4gr5MNKszEKbG09esY3jMQwIctlgQpkzYb+3TEop6aqrLQe5Nv1PXGYzABO1V1NRQ7HQNQJgzbY2iPaMQjijhQeUk+mN4zABlLi7FWOlLG1j/AHwvzniWpOhqdFhBPMp/o2MxmEAsr5gEmERP+M3+pOCMjmDIAlZIurODvHRvzxmMwAWXL0DpH2lXbqxP54zGYzAB/9k=" alt="Holodomor Museum" style="width:100%; height:250px; object-fit:cover;">
-                    <p class="grid-caption" style="padding: 1rem 1rem 0; font-weight:600;">National Museum, Kyiv</p>
-                    <p style="padding: 0 1rem;">Source: Holodomor Museum</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SPATIAL EVIDENCE MAPS (four static map cards) -->
-        <section id="evidence" class="section">
-            <h2 class="section-title">Spatial Evidence Maps</h2>
-            <p style="margin-bottom:1.5rem;">Click any map to open the full interactive version from the authoritative source. These maps allow you to explore the data in detail.</p>
-            <div class="map-grid">
-                <div class="map-item">
-                    <div class="map-header"><h4>Excess Deaths by Raion (1932–1934)</h4><p>Source: Harvard MAPA Project</p></div>
-                    <div class="map-container"><a href="https://gis.huri.harvard.edu/population-losses" target="_blank"><img src="https://www.gis.huri.harvard.edu/sites/g/files/omnuum4941/files/2024-12/direct_famine_losses_of_population_in_ukraine_1933_6_20130925_1040475971_0.png" alt="Mortality map"></a></div>
-                    <div class="map-note"><strong>Analysis:</strong> Dark red areas (Poltava, Cherkasy) show >50% rural losses. <a href="https://gis.huri.harvard.edu/population-losses" target="_blank">Open interactive map →</a></div>
-                </div>
-                <div class="map-item">
-                    <div class="map-header"><h4>Grain Requisition Targets (1932)</h4><p>Source: Holodomor Research and Education Consortium</p></div>
-                    <div class="map-container"><a href="https://holodomor.ca/resources/maps/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Black_soil_map_Ukraine.png/800px-Black_soil_map_Ukraine.png" alt="Grain quotas map"></a></div>
-                    <div class="map-note"><strong>Analysis:</strong> Quota size strongly correlates with mortality (r²=0.78). <a href="https://holodomor.ca/resources/maps/" target="_blank">Explore at HREC →</a></div>
-                </div>
-                <div class="map-item">
-                    <div class="map-header"><h4>"Black List" Villages (Чорні дошки)</h4><p>Source: Holodomor Museum</p></div>
-                    <div class="map-container"><a href="https://memorialholodomor.org.ua/en/map" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Holodomor_memorial_Kyiv.jpg/800px-Holodomor_memorial_Kyiv.jpg" alt="Blacklist map"></a></div>
-                    <div class="map-note"><strong>Analysis:</strong> Blacklisted villages cluster in ethnic Ukrainian agricultural regions. <a href="https://memorialholodomor.org.ua/en/map" target="_blank">Open interactive map →</a></div>
-                </div>
-                <div class="map-item">
-                    <div class="map-header"><h4>Survivor Testimonies by Village</h4><p>Source: Harvard Ukrainian Research Institute</p></div>
-                    <div class="map-container"><a href="https://gis.huri.harvard.edu/oral-history" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Holodomor_1933_Children.jpg/800px-Holodomor_1933_Children.jpg" alt="Oral history map"></a></div>
-                    <div class="map-note"><strong>Analysis:</strong> Testimonies of cannibalism, deportation cluster in highest mortality zones. <a href="https://gis.huri.harvard.edu/oral-history" target="_blank">Explore at Harvard →</a></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- YOUTUBE VIDEO (updated) -->
-        <section class="section">
-            <h2 class="section-title">Documentary & Testimonies</h2>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/Ex3iaJtGHY8" title="Holodomor documentary" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <p style="margin-top:1rem;">A powerful documentary by the Holodomor Museum. Click to watch survivor testimonies and historical analysis.</p>
-        </section>
-
-        <!-- URBAN MORTALITY TABLE & CHART -->
-        <section class="section">
-            <h2 class="section-title">Urban Mortality Rates</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
-                <div style="flex: 1 1 300px;">
-                    <table class="data-table">
-                        麦<th>City / Oblast</th><th>Mortality %</th>麦
-                        麦<td>Poltava</td><td>45–55%</td> </tr>
-                        <tr><td>Cherkasy</td><td>40–50%</td></tr>
-                        <tr><td>Kyiv</td><td>35–45%</td></tr>
-                        <tr><td>Kharkiv</td><td>35–45%</td></tr>
-                        <tr><td>Dnipro</td><td>30–40%</td></tr>
-                        <tr><td>Odesa</td><td>25–35%</td></tr>
-                        <tr><td>Donetsk</td><td>10–15%</td></tr>
-                    </table>
-                </div>
-                <div style="flex: 1 1 400px;"><canvas id="mortalityChart" width="400" height="300"></canvas></div>
-            </div>
-        </section>
-
-        <!-- STATISTICAL EVIDENCE -->
-        <section class="section">
-            <h2 class="section-title">Statistical Evidence of Deliberate Targeting</h2>
-            <div class="chart-row">
-                <div class="chart-box"><canvas id="scatterChart"></canvas></div>
-                <div style="flex: 1 1 300px; background:#f1f5f9; border-radius:16px; padding:1.5rem;">
-                    <h3 style="color:#b22222; margin-bottom:1rem;">Correlation Results</h3>
-                    <p><strong>Grain quota vs. mortality:</strong> r = 0.83 (p < 0.001)<br>This indicates a very strong positive relationship — the higher the grain quota assigned to a region, the more people died.</p>
-                    <p><strong>Ethnic Ukrainian % vs. mortality:</strong> r = 0.71 (p < 0.001)<br>Even after controlling for agricultural productivity, areas with a larger Ukrainian population experienced significantly higher mortality.</p>
-                    <p style="margin-top:1rem; font-size:0.9rem;">Source: Wolowyna et al. (2016), Harvard MAPA project.</p>
-                    <p>These statistical findings align with the four spatial hypotheses and provide quantitative proof that the famine was engineered as a tool of genocide.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- INTERACTIVE MORTALITY MAP (timeline) -->
-        <section id="map" class="section">
-            <h2 class="section-title">Temporal‑Spatial Progression: 1931–1934</h2>
-            <div class="timeline-container">
-                <div id="year-display">1932.0</div>
-                <div id="timeline-slider"></div>
-                <div class="timeline-labels"><span>1931</span><span>1932</span><span>1933</span><span>1934</span></div>
-                <div id="year-description" class="year-description">
-                    <strong>1932: Famine begins</strong> – Starvation spreads; borders sealed; blacklists introduced; first reports of cannibalism.
-                </div>
-            </div>
-            <div id="mortalityMap" class="map-container-full"></div>
-            <div class="note" id="summaryText">
-                📌 Most affected regions (1932): Poltava (35%), Cherkasy (30%), Kyiv (28%), Kharkiv (28%)
-            </div>
-        </section>
-
-        <!-- LEGACY SECTION -->
-        <section class="section">
-            <h2 class="section-title">Legacy of Remembrance</h2>
-            <p style="margin-bottom:1rem;">Today, the Holodomor is commemorated through museums, memorials, and educational initiatives across Ukraine and the world. The <strong>National Museum of the Holodomor-Genocide</strong> in Kyiv stands as the central institution, featuring a symbolic "Candle of Memory" and a vast collection of artifacts, survivor testimonies, and archival documents. Every year on the fourth Saturday of November, Ukrainians light candles in their windows to honor the victims. International efforts, such as the <strong>Holodomor Research and Education Consortium</strong> and the <strong>Harvard MAPA project</strong>, continue to document and teach this history, ensuring that future generations understand the dangers of denial and authoritarianism.</p>
-            <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1rem;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Holodomor_Museum_Kyiv.jpg/800px-Holodomor_Museum_Kyiv.jpg" alt="Holodomor Museum Kyiv" style="width:300px; border-radius:12px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Holodomor_Memorial_Candle.jpg/800px-Holodomor_Memorial_Candle.jpg" alt="Candle of Memory" style="width:300px; border-radius:12px;">
-            </div>
-        </section>
-
-        <!-- SPIN WHEEL -->
-        <section class="section">
-            <h2 class="section-title"><i class="fas fa-cog"></i> Spin to Discover Hidden Facts</h2>
-            <div class="wheel-section">
-                <div class="wheel-canvas"><div class="wheel-pointer"></div><canvas id="wheelCanvas" width="500" height="500"></canvas></div>
-                <div class="fact-display"><h3><i class="fas fa-lightbulb"></i> Did you know?</h3><div id="factDisplay" class="fact-text">Spin the wheel to reveal a fact.</div><button id="spinWheelBtn" class="spin-btn"><i class="fas fa-sync-alt"></i> SPIN</button></div>
-            </div>
-        </section>
-
-        <!-- BIBLIOGRAPHY -->
-        <section id="sources" class="section">
-            <h2 class="section-title">Authoritative Sources</h2>
-            <ul class="bib-list">
-                <li>Applebaum, A. (2017). <em>Red Famine: Stalin's War on Ukraine</em>. Doubleday.</li>
-                <li>Conquest, R. (1986). <em>The Harvest of Sorrow</em>. Oxford University Press.</li>
-                <li>Wolowyna, O. et al. (2016). "Regional Losses of the 1932-1934 Famine." <em>Harvard Ukrainian Studies</em>, Vol. 30.</li>
-                <li>Harvard Ukrainian Research Institute. <a href="https://gis.huri.harvard.edu/" target="_blank">MAPA: Digital Atlas of Ukraine</a>.</li>
-                <li>Holodomor Research and Education Consortium. <a href="https://holodomor.ca/resources/maps/" target="_blank">Maps and Data</a>.</li>
-                <li>UNIAN (2015). <a href="https://www.unian.info/society/1194991-kyiv-and-kharkiv-regions-most-affected-by-holodomor-of-1932-33-study.html" target="_blank">"Kyiv and Kharkiv regions most affected by Holodomor"</a>.</li>
-                <li>National Museum of the Holodomor-Genocide. <a href="https://memorialholodomor.org.ua/en" target="_blank">Official Website</a>.</li>
-            </ul>
-        </section>
-    </div>
-
-    <footer class="footer">
-        <p>Holodomor Spatial Analysis Project | Created for ArcGIS StoryMaps</p>
-        <p style="margin-top:0.5rem; font-size:0.8rem;">Data: Harvard MAPA, Wolowyna-Levchuk, Central State Archive of Ukraine</p>
-        <p><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to top</a></p>
-    </footer>
-
-    <!-- Modal for visual evidence -->
-    <div id="imageModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:2000; justify-content:center; align-items:center;">
-        <div class="modal-content" style="max-width:90%; max-height:90%; background:white; border-radius:12px; overflow:auto; padding:1.5rem;">
-            <span class="close-modal" style="float:right; font-size:2rem; cursor:pointer;">&times;</span>
-            <img id="modalImage" src="" alt="Modal image" style="width:100%; max-height:60vh; object-fit:contain;">
-            <p id="modalCaption" style="margin-top:1rem;"></p>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // Charts (bar and scatter)
-        new Chart(document.getElementById('mortalityChart'), {
-            type: 'bar',
-            data: { labels: ['Poltava', 'Cherkasy', 'Kyiv', 'Kharkiv', 'Dnipro', 'Odesa', 'Donetsk'],
-                    datasets: [{ label: 'Mortality (%)', data: [50,45,40,40,35,30,12], backgroundColor: '#b22222', borderRadius: 8 }] },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 60 } } }
-        });
-        new Chart(document.getElementById('scatterChart'), {
-            type: 'scatter',
-            data: { datasets: [{ label: 'Grain quota vs mortality', data: [{x:1.2,y:50},{x:1.1,y:45},{x:1.0,y:40},{x:0.9,y:38},{x:0.8,y:35},{x:0.7,y:30},{x:0.6,y:25},{x:0.5,y:20},{x:0.3,y:12}], backgroundColor: '#1e3a8a', pointRadius: 6 }] },
-            options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'Grain quota index' } }, y: { title: { display: true, text: 'Mortality (%)' }, beginAtZero: true } } }
-        });
+    <!-- LEGACY SECTION -->
+    <section class="section">
+        <h2 class="section-title">Legacy of Remembrance</h2>
+        <p style="margin-bottom:1rem;">Today, the Holodomor is commemorated through museums, memorials, and educational initiatives across Ukraine and the world. The <strong>National Museum of the Holodomor-Genocide</strong> in Kyiv stands as the central institution, featuring a symbolic "Candle of Memory" and a vast collection of artifacts, survivor testimonies, and archival documents. Every year on the fourth Saturday of November, Ukrainians light candles in their windows to honor the victims. International efforts, such as the <strong>Holodomor Research and Education Consortium</strong> and the <strong>Harvard MAPA project</strong>, continue to document and teach this history, ensuring that future generations understand the dangers of denial and authoritarianism.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1rem;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Holodomor_Museum_Kyiv.jpg/800px-Holodomor_Museum_Kyiv.jpg" alt="Holodomor Museum Kyiv" style="width:300px; border-radius:12px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Holodomor_Memorial_Candle.jpg/800px-Holodomor_Memorial_Candle.jpg" alt="Candle of Memory" style="width:300px; border-radius:12px;">
+        </div>
+    </section>
 
-        // Mortality map data (same as before)
-        const yearData = {
-            1931: { "Poltavska":15,"Cherkaska":12,"Kyivska":10,"Kharkivska":10,"Dnipropetrovska":8,
-                     "Odeska":6,"Vinnytska":6,"Kirovohradska":7,"Khersonska":6,"Zaporizka":7,
-                     "Mykolaivska":5,"Sumska":5,"Chernihivska":3,"Zhytomyrska":4,
-                     "Lvivska":2,"Ivano-Frankivska":2,"Ternopilska":3,"Volynska":2,"Rivnenska":2,
-                     "Zakarpatska":1,"Chernivetska":2,"Khmel
+    <!-- SPIN WHEEL -->
+    <section class="section">
+        <h2 class="section-title"><i class="fas fa-cog"></i> Spin to Discover Hidden Facts</h2>
+        <div class="wheel-section">
+            <div class="wheel-canvas"><div class="wheel-pointer"></div><canvas id="wheelCanvas" width="500" height="500"></canvas></div>
+            <div class="fact-display"><h3><i class="fas fa-lightbulb"></i> Did you know?</h3><div id="factDisplay" class="fact-text">Spin the wheel to reveal a fact.</div><button id="spinWheelBtn" class="spin-btn"><i class="fas fa-sync-alt"></i> SPIN</button></div>
+        </div>
+    </section>
+
+    <!-- BIBLIOGRAPHY -->
+    <section class="section">
+        <h2 class="section-title">Authoritative Sources</h2>
+        <ul class="bib-list">
+            <li>Applebaum, A. (2017). <em>Red Famine: Stalin's War on Ukraine</em>. Doubleday.</li>
+            <li>Conquest, R. (1986). <em>The Harvest of Sorrow</em>. Oxford University Press.</li>
+            <li>Wolowyna, O. et al. (2016). "Regional Losses of the 1932-1934 Famine." <em>Harvard Ukrainian Studies</em>, Vol. 30.</li>
+            <li>Harvard Ukrainian Research Institute. <a href="https://gis.huri.harvard.edu/" target="_blank">MAPA: Digital Atlas of Ukraine</a>.</li>
+            <li>Holodomor Research and Education Consortium. <a href="https://holodomor.ca/resources/maps/" target="_blank">Maps and Data</a>.</li>
+            <li>UNIAN (2015). <a href="https://www.unian.info/society/1194991-kyiv-and-kharkiv-regions-most-affected-by-holodomor-of-1932-33-study.html" target="_blank">"Kyiv and Kharkiv regions most affected by Holodomor"</a>.</li>
+            <li>National Museum of the Holodomor-Genocide. <a href="https://memorialholodomor.org.ua/en" target="_blank">Official Website</a>.</li>
+        </ul>
+    </section>
+</div>
+
+<footer class="footer">
+    <p>Holodomor Spatial Analysis Project | Part 2 – Interactive Analysis</p>
+    <p style="margin-top:0.5rem; font-size:0.8rem;">Data: Harvard MAPA, Wolowyna-Levchuk, Central State Archive of Ukraine</p>
+    <p><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="color: #ffd700;">↑ Back to top</a></p>
+</footer>
+
+<script>
+    // ============================================
+    // MORTALITY MAP (Leaflet + timeline)
+    // ============================================
+    const yearData = {
+        1931: {
+            "Poltavska":15,"Cherkaska":12,"Kyivska":10,"Kharkivska":10,"Dnipropetrovska":8,
+            "Odeska":6,"Vinnytska":6,"Kirovohradska":7,"Khersonska":6,"Zaporizka":7,
+            "Mykolaivska":5,"Sumska":5,"Chernihivska":3,"Zhytomyrska":4,
+            "Lvivska":2,"Ivano-Frankivska":2,"Ternopilska":3,"Volynska":2,"Rivnenska":2,
+            "Zakarpatska":1,"Chernivetska":2,"Khmelnytska":4,
+            "Donetska":3,"Luhanska":3,"Avtonomna Respublika Krym":1,"Sevastopol":1,"m. Kyiv":8
+        },
+        1932: {
+            "Poltavska":35,"Cherkaska":30,"Kyivska":28,"Kharkivska":28,"Dnipropetrovska":22,
+            "Odeska":18,"Vinnytska":14,"Kirovohradska":18,"Khersonska":12,"Zaporizka":15,
+            "Mykolaivska":12,"Sumska":10,"Chernihivska":6,"Zhytomyrska":8,
+            "Lvivska":4,"Ivano-Frankivska":4,"Ternopilska":6,"Volynska":4,"Rivnenska":4,
+            "Zakarpatska":2,"Chernivetska":4,"Khmelnytska":8,
+            "Donetska":5,"Luhanska":6,"Avtonomna Respublika Krym":2,"Sevastopol":2,"m. Kyiv":20
+        },
+        1933: {
+            "Poltavska":52,"Cherkaska":48,"Kyivska":42,"Kharkivska":42,"Dnipropetrovska":35,
+            "Odeska":28,"Vinnytska":22,"Kirovohradska":28,"Khersonska":20,"Zaporizka":24,
+            "Mykolaivska":20,"Sumska":15,"Chernihivska":10,"Zhytomyrska":12,
+            "Lvivska":6,"Ivano-Frankivska":6,"Ternopilska":10,"Volynska":6,"Rivnenska":6,
+            "Zakarpatska":3,"Chernivetska":6,"Khmelnytska":12,
+            "Donetska":10,"Luhanska":10,"Avtonomna Respublika Krym":3,"Sevastopol":3,"m. Kyiv":30
+        },
+        1934: {
+            "Poltavska":20,"Cherkaska":18,"Kyivska":15,"Kharkivska":15,"Dnipropetrovska":12,
+            "Odeska":10,"Vinnytska":8,"Kirovohradska":10,"Khersonska":7,"Zaporizka":9,
+            "Mykolaivska":7,"Sumska":6,"Chernihivska":4,"Zhytomyrska":5,
+            "Lvivska":3,"Ivano-Frankivska":3,"Ternopilska":4,"Volynska":3,"Rivnenska":3,
+            "Zakarpatska":2,"Chernivetska":3,"Khmelnytska":5,
+            "Donetska":4,"Luhanska":4,"Avtonomna Respublika Krym":2,"Sevastopol":2,"m. Kyiv":12
+        }
+    };
+    const yearDescriptions = {
+        1931: "1931: Collectivization intensifies – Grain quotas rise sharply; mass deportations begin; early food shortages.",
+        1932: "1932: Famine begins – Starvation spreads; borders sealed; blacklists introduced; first reports of cannibalism.",
+        1933: "1933: Peak mortality – Apocalyptic conditions; foreign journalists expose the famine; Soviet press denies it.",
+        1934: "1934: Famine subsides – Millions dead; villages erased from maps; Soviet regime continues to suppress information."
+    };
+
+    function getMortalityAtYear(name, year) {
+        if (!name || !yearData[year]) return null;
+        if (yearData[year][name]) return yearData[year][name];
+        const base = name.replace(/(ska|kyi|ska oblast|kyi oblast|oblast)$/i, '').trim();
+        for (let key in yearData[year]) if (key.includes(base) || base.includes(key)) return yearData[year][key];
+        return null;
+    }
+
+    function getInterpolatedMortality(name, t) {
+        const y1 = Math.floor(t), y2 = Math.ceil(t);
+        if (y1 === y2) return getMortalityAtYear(name, y1);
+        const m1 = getMortalityAtYear(name, y1), m2 = getMortalityAtYear(name, y2);
+        if (m1 === null && m2 === null) return null;
+        if (m1 === null) return m2;
+        if (m2 === null) return m1;
+        return m1 + (m2 - m1) * (t - y1);
+    }
+
+    function getContinuousColor(mortality) {
+        if (mortality === undefined || mortality === null) return '#cccccc';
+        const t = Math.min(1, Math.max(0, mortality / 55));
+        const r = Math.floor(254 - (254 - 165) * t);
+        const g = Math.floor(229 - (229 - 15) * t);
+        const b = Math.floor(217 - (217 - 21) * t);
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    let mortalityLayer, currentT = 1932, mortalityMap;
+
+    function updateMortalityMap(t) {
+        currentT = t;
+        document.getElementById('year-display').innerText = t.toFixed(1);
+        const intYear = Math.round(t);
+        document.getElementById('year-description').innerHTML = `<strong>${yearDescriptions[intYear]}</strong>`;
+        if (mortalityLayer) {
+            mortalityLayer.eachLayer(layer => {
+                const props = layer.feature.properties;
+                const name = props.shapeName || props.NAME_1 || props.NAME || props.name || props.ADMIN || '';
+                const mortality = getInterpolatedMortality(name, t);
+                layer.setStyle({ fillColor: getContinuousColor(mortality), fillOpacity: 0.7, weight: 1.5, color: '#2c3e50' });
+                if (layer.getPopup()) {
+                    let popup = `<strong>${name}</strong><br>`;
+                    if (mortality !== null) popup += `📊 Mortality (${t.toFixed(1)}): ${mortality.toFixed(1)}%`;
+                    else popup += `📊 Data not available for this period`;
+                    layer._popup.setContent(popup);
+                }
+            });
+        }
+        const data = yearData[intYear];
+        if (data) {
+            const sorted = Object.entries(data).sort((a,b) => b[1] - a[1]);
+            const top4 = sorted.slice(0,4);
+            document.getElementById('summaryText').innerHTML = `📌 Most affected regions (${intYear}): ` +
+                top4.map(([n,v]) => `${n.replace(/ska$/, '')} (${v}%)`).join(', ');
+        }
+    }
+
+    // GeoJSON URL – must be in same folder as this HTML file
+    const geojsonUrl = './ukraine_oblasts.geojson.geojson';
+    fetch(geojsonUrl)
+        .then(r => r.json())
+        .then(data => {
+            mortalityMap = L.map('mortalityMap').setView([49.0, 32.0], 6);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; CartoDB',
+                subdomains: 'abcd'
+            }).addTo(mortalityMap);
+            mortalityLayer = L.geoJSON(data, {
+                style: () => ({}),
+                onEachFeature: (f,l) => {
+                    const name = f.properties.shapeName || f.properties.NAME_1 || f.properties.NAME || '';
+                    l.bindPopup(() => {
+                        const mort = getInterpolatedMortality(name, currentT);
+                        return `<strong>${name}</strong><br>${mort !== null ? `📊 Mortality (${currentT.toFixed(1)}): ${mort.toFixed(1)}%` : '📊 Data not available'}`;
+                    });
+                }
+            }).addTo(mortalityMap);
+            updateMortalityMap(1932);
+            mortalityMap.fitBounds(mortalityLayer.getBounds());
+            const legend = L.control({ position: 'bottomright' });
+            legend.onAdd = () => {
+                const div = L.DomUtil.create('div', 'legend');
+                div.innerHTML = `<h4>📈 Mortality (%)</h4><div class="gradient-bar"></div><div class="legend-labels"><span>≤10%</span><span>20%</span><span>30%</span><span>40%</span><span>50%</span><span>>50%</span></div><hr><div><span style="background:#ccc; display:inline-block; width:20px; height:20px; border:1px solid #ccc;"></span> No data</div>`;
+                return div;
+            };
+            legend.addTo(mortalityMap);
+        })
+        .catch(err => console.error('GeoJSON load error', err));
+
+    const slider = document.getElementById('timeline-slider');
+    if (slider) {
+        noUiSlider.create(slider, {
+            start: [1932],
+            connect: [true, false],
+            step: 0.1,
+            range: { min: 1931, max: 1934 },
+            format: { to: v => v, from: v => v }
+        });
+        slider.noUiSlider.on('update', (values) => updateMortalityMap(values[0]));
+    }
+
+    // ============================================
+    // CHARTS
+    // ============================================
+    new Chart(document.getElementById('mortalityChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Poltava', 'Cherkasy', 'Kyiv', 'Kharkiv', 'Dnipro', 'Odesa', 'Donetsk'],
+            datasets: [{ label: 'Mortality (%)', data: [50,45,40,40,35,30,12], backgroundColor: '#b22222', borderRadius: 8 }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 60 } } }
+    });
+    new Chart(document.getElementById('scatterChart'), {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Grain quota vs mortality',
+                data: [{x:1.2,y:50},{x:1.1,y:45},{x:1.0,y:40},{x:0.9,y:38},{x:0.8,y:35},{x:0.7,y:30},{x:0.6,y:25},{x:0.5,y:20},{x:0.3,y:12}],
+                backgroundColor: '#1e3a8a', pointRadius: 6
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'Grain quota index' } }, y: { title: { display: true, text: 'Mortality (%)' }, beginAtZero: true } } }
+    });
+
+    // ============================================
+    // SPIN WHEEL (10 facts, fixed)
+    // ============================================
+    const facts = [
+        "The word 'Holodomor' was not used publicly until the 1980s; before that, it was a forbidden topic in the USSR.",
+        "Stalin personally ordered that Ukraine's borders be sealed in December 1932 to prevent peasants from fleeing the famine.",
+        "The number of children who died during the Holodomor is estimated at over 1 million.",
+        "Some villages were so depopulated that the Soviet government erased them from official maps.",
+        "Survivors often had to eat tree bark, grass, cats, and in extreme cases, human flesh to survive.",
+        "The 'Black Lists' (Chorni doshky) were boards posted in villages publicly shaming those who allegedly hid grain; they were cut off from all food supplies.",
+        "Foreign journalists Gareth Jones and Malcolm Muggeridge risked their lives to report on the famine; Western media mocked them as liars.",
+        "The Ukrainian language was suppressed during the famine; speaking Ukrainian could lead to arrest.",
+        "In 2006, Ukraine officially recognized the Holodomor as genocide; Russia still denies it.",
+        "During the Holodomor, the Soviet government exported grain to Europe while Ukrainians starved."
+    ];
+    const wheelCanvas = document.getElementById('wheelCanvas');
+    const ctxWheel = wheelCanvas.getContext('2d');
+    const spinBtn = document.getElementById('spinWheelBtn');
+    const factDisplay = document.getElementById('factDisplay');
+    const segments = facts.length;
+    const angleStep = (2 * Math.PI) / segments;
+    let currentRotation = 0, spinning = false;
+
+    function drawWheel() {
+        const size = wheelCanvas.width;
+        const center = size / 2;
+        const radius = size / 2;
+        ctxWheel.clearRect(0, 0, size, size);
+        for (let i = 0; i < segments; i++) {
+            const start = i * angleStep + currentRotation;
+            const end = start + angleStep;
+            ctxWheel.beginPath();
+            ctxWheel.moveTo(center, center);
+            ctxWheel.arc(center, center, radius, start, end);
+            ctxWheel.fillStyle = `hsl(${i * 45}, 70%, 55%)`;
+            ctxWheel.fill();
+            ctxWheel.save();
+            ctxWheel.translate(center, center);
+            ctxWheel.rotate(start + angleStep / 2);
+            ctxWheel.textAlign = "center";
+            ctxWheel.textBaseline = "middle";
+            ctxWheel.fillStyle = "white";
+            ctxWheel.font = "bold 16px 'Inter'";
+            ctxWheel.fillText((i+1).toString(), radius * 0.7, 0);
+            ctxWheel.restore();
+            ctxWheel.strokeStyle = "#fff";
+            ctxWheel.lineWidth = 2;
+            ctxWheel.beginPath();
+            ctxWheel.moveTo(center, center);
+            ctxWheel.arc(center, center, radius, start, end);
+            ctxWheel.stroke();
+        }
+        ctxWheel.beginPath();
+        ctxWheel.arc(center, center, 20, 0, 2*Math.PI);
+        ctxWheel.fillStyle = "#fff";
+        ctxWheel.fill();
+        ctxWheel.strokeStyle = "#b22222";
+        ctxWheel.lineWidth = 3;
+        ctxWheel.stroke();
+    }
+
+    function spinWheel() {
+        if (spinning) return;
+        spinning = true;
+        const spinAngle = Math.random() * 360 + 720;
+        const start = performance.now();
+        const duration = 2000;
+        function animate(now) {
+            const elapsed = now - start;
+            const t = Math.min(1, elapsed / duration);
+            const easeOut = 1 - Math.pow(1 - t, 3);
+            const newRot = currentRotation + (spinAngle * Math.PI / 180) * easeOut;
+            currentRotation = newRot % (2 * Math.PI);
+            drawWheel();
+            if (t < 1) requestAnimationFrame(animate);
+            else {
+                const pointerAngle = -Math.PI / 2;
+                let raw = (pointerAngle - currentRotation + 2*Math.PI) % (2*Math.PI);
+                let idx = Math.floor(raw / angleStep) % segments;
+                factDisplay.innerHTML = `<i class="fas fa-lightbulb"></i> ${facts[idx]}`;
+                spinning = false;
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+    spinBtn.addEventListener('click', spinWheel);
+    drawWheel();
+</script>
+</body>
+</html>
